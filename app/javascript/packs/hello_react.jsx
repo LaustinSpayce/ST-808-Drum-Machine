@@ -5,6 +5,8 @@
 import React, { useState, useRef, useEffect, Component }  from 'react'
 import ReactDOM from 'react-dom'
 import Tone from 'tone'
+import StepSequencer from '../components/step_sequencer'
+import { ThemeProvider } from '@material-ui/core/styles'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -17,7 +19,7 @@ export default class App extends React.Component {
     this.triggerHatClosed = this.triggerHatClosed.bind(this)
     this.triggerHatOpen = this.triggerHatOpen.bind(this)
 
-    // Initialise the Samplers / Synths
+    // Initialise the Samplers / Synths    
     this.osc = new Tone.Synth().toMaster()
     this.kickDrum = new Tone.Sampler({'C4' : '/samples/kick.mp3'}).toMaster()
     this.snareDrum = new Tone.Sampler({'C4' : '/samples/snare.mp3'}).toMaster()
@@ -47,18 +49,12 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.triggerKick}>
-          Boom
-        </button>
-        <button onClick={this.triggerSnare}>
-          Piak
-        </button>
-        <button onClick={this.triggerHatClosed}>
-          Tsk
-        </button>
-        <button onClick={this.triggerHatOpen}>
-          Tssssh
-        </button>
+        <StepSequencer 
+          triggerKick={this.triggerKick} 
+          triggerSnare={this.triggerSnare} 
+          triggerHatOp={this.triggerHatOpen} 
+          triggerHatCl={this.triggerHatClosed} 
+        />
       </div>
     );
   }
