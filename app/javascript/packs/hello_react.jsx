@@ -12,10 +12,11 @@ export default class App extends React.Component {
 
     this.handleClick = this.handleClick.bind(this)
     this.osc = new Tone.Synth().toMaster()
+    this.kickDrum = new Tone.MonoSynth().toMaster()
   }
   
   handleClick ()   {
-    this.osc.triggerAttackRelease('C5', '8n')
+    this.kickDrum.triggerAttackRelease('C1', '16n')
   }
 
   render() {
