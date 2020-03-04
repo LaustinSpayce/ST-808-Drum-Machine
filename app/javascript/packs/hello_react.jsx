@@ -2,25 +2,36 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-import React from 'react'
+import React, { useState, useRef, useEffect, Component }  from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+import Tone from "tone";
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
+export default class App extends React.Component {
+  constructor (props) {
+    super(props)
 
-Hello.defaultProps = {
-  name: 'David'
-}
+    this.handleClick = this.handleClick.bind(this)
+    this.osc = new Tone.Synth().toMaster()
+  }
+  
+  handleClick ()   {
+    this.osc.triggerAttackRelease('C5', '8n')
+  }
 
-Hello.propTypes = {
-  name: PropTypes.string
-}
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>
+          start
+        </button>
+      </div>
+    );
+  }
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    <App/>,
     document.body.appendChild(document.createElement('div')),
   )
 })
