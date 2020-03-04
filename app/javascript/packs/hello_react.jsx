@@ -4,7 +4,7 @@
 
 import React, { useState, useRef, useEffect, Component }  from 'react'
 import ReactDOM from 'react-dom'
-import Tone from 'tone';
+import Tone from 'tone'
 
 export default class App extends React.Component {
   constructor (props) {
