@@ -42,16 +42,32 @@ export default class StepSequencer extends Component {
 
   render() {
     let array = []
+    let bars = 0
+    let beats = 0
+    let subbeats = 0
     for (let i = 1; i <= 16; i++) {
-      array.push(i)
+      let string = bars + ":" + beats + ":" + subbeats
+      array.push(string)
+      subbeats++;
+      if (subbeats === 4) {
+        beats++
+        subbeats = 0
+        if (beats === 4 ) {
+          bars++
+          beats = 0
+        }
+      }
     }
+
     let headerCells = array.map((number)=>{
-      return (<SpecialCells>{number}</SpecialCells>)
+      return (<SpecialCells>{number.slice(2)}</SpecialCells>)
     },
+
     ) 
-    let blankCells = array.map((number) => {
-      return(<SpecialCells></SpecialCells>)
+    let blankCells = array.map((number, index) => {
+      return(<SpecialCells key={number} id={index}></SpecialCells>)
     })
+
     return (
       <Container> 
         <MyTable>

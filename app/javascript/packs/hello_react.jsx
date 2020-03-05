@@ -28,12 +28,20 @@ export default class App extends React.Component {
     this.snareDrum = new Tone.Sampler({'C4' : '/samples/snare.mp3'}).toMaster()
     this.Hats = new Tone.Sampler({'C4' : '/samples/Hat_op.mp3', 'D4' : '/samples/Hat_cl.mp3'}).toMaster()
     this.isPlaying = false
-    Tone.Transport.schedule(this.triggerSnare, '0:1:0')
-    Tone.Transport.schedule(this.triggerSnare, '0:3:0')
-    Tone.Transport.schedule(this.triggerKick, 0)
-    Tone.Transport.schedule(this.triggerKick, '0:1:0')
-    Tone.Transport.schedule(this.triggerKick, '0:2:0')
-    Tone.Transport.schedule(this.triggerKick, '0:3:0')
+    // Tone.Transport.schedule(this.triggerSnare, '0:1:0')
+    // Tone.Transport.schedule(this.triggerSnare, '0:3:0')
+    // Tone.Transport.schedule(this.triggerKick, 0)
+    // Tone.Transport.schedule(this.triggerKick, '0:1:2')
+    // Tone.Transport.schedule(this.triggerKick, '0:2:2')
+    // Tone.Transport.schedule(this.triggerKick, '0:3:0')
+    // Tone.Transport.schedule(this.triggerHatClosed, 0)
+    // Tone.Transport.schedule(this.triggerHatClosed, '0:0:2')
+    // Tone.Transport.schedule(this.triggerHatClosed, '0:1:0')
+    // Tone.Transport.schedule(this.triggerHatClosed, '0:1:2')
+    // Tone.Transport.schedule(this.triggerHatClosed, '0:2:0')
+    // Tone.Transport.schedule(this.triggerHatClosed, '0:2:2')
+    // Tone.Transport.schedule(this.triggerHatClosed, '0:3:0')
+    // Tone.Transport.schedule(this.triggerHatOpen, '0:3:2')
     Tone.Transport.loopEnd = '1m'
     Tone.Transport.loop = true
   }
