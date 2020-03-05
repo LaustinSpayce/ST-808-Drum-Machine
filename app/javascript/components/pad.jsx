@@ -22,7 +22,30 @@ export default class Pad extends React.Component {
 
     this.state = {
       active: false,
-      playing: false
+      playing: false,
+      activeIndex: 0,
+      content: ""
+    }
+
+    this.updateTC = this.updateTC.bind(this)
+
+    Tone.Transport.scheduleRepeat(this.updateTC, '16n')
+
+  }
+
+  updateTC () {
+    let index = this.state.activeIndex
+    if (index > 15) index = 0
+    if (Tone.Transport.state === "stopped") {
+      this.setState( {activeIndex: 0, content: "" })
+    } else {     
+      if (index === this.props.index) {
+        index++
+        this.setState( {content: "X", activeIndex: index} )
+      } else {
+        index++
+        this.setState( {content:"", activeIndex: index} )
+      }
     }
   }
 
@@ -35,7 +58,7 @@ export default class Pad extends React.Component {
 
   render () {
     return (
-      <PadBox onClick={() => {this.props.whenClicked()}}></PadBox>
+      <PadBox onClick={() => {this.props.whenClicked()}}>{this.state.content}</PadBox>
     )
   }
 }
