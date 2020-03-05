@@ -8,7 +8,7 @@ import Tone from 'tone'
 import StepSequencer from '../components/step_sequencer'
 import { ThemeProvider } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import Transport from '../components/transport'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -20,28 +20,13 @@ export default class App extends React.Component {
     this.triggerSnare = this.triggerSnare.bind(this)
     this.triggerHatClosed = this.triggerHatClosed.bind(this)
     this.triggerHatOpen = this.triggerHatOpen.bind(this)
-    this.loopPlay = this.loopPlay.bind(this)
 
     // Initialise the Samplers / Synths    
     this.osc = new Tone.Synth().toMaster()
     this.kickDrum = new Tone.Sampler({'C4' : '/samples/kick.mp3'}).toMaster()
     this.snareDrum = new Tone.Sampler({'C4' : '/samples/snare.mp3'}).toMaster()
     this.Hats = new Tone.Sampler({'C4' : '/samples/Hat_op.mp3', 'D4' : '/samples/Hat_cl.mp3'}).toMaster()
-    this.isPlaying = false
-    // Tone.Transport.schedule(this.triggerSnare, '0:1:0')
-    // Tone.Transport.schedule(this.triggerSnare, '0:3:0')
-    // Tone.Transport.schedule(this.triggerKick, 0)
-    // Tone.Transport.schedule(this.triggerKick, '0:1:2')
-    // Tone.Transport.schedule(this.triggerKick, '0:2:2')
-    // Tone.Transport.schedule(this.triggerKick, '0:3:0')
-    // Tone.Transport.schedule(this.triggerHatClosed, 0)
-    // Tone.Transport.schedule(this.triggerHatClosed, '0:0:2')
-    // Tone.Transport.schedule(this.triggerHatClosed, '0:1:0')
-    // Tone.Transport.schedule(this.triggerHatClosed, '0:1:2')
-    // Tone.Transport.schedule(this.triggerHatClosed, '0:2:0')
-    // Tone.Transport.schedule(this.triggerHatClosed, '0:2:2')
-    // Tone.Transport.schedule(this.triggerHatClosed, '0:3:0')
-    // Tone.Transport.schedule(this.triggerHatOpen, '0:3:2')
+    
     Tone.Transport.loopEnd = '1m'
     Tone.Transport.loop = true
   }
@@ -50,33 +35,20 @@ export default class App extends React.Component {
     this.osc.triggerAttackRelease('C4', '8n')
   }
 
-  triggerKick () {
-    this.kickDrum.triggerAttack('C4')
+  triggerKick (time, value) {
+    if (value) this.kickDrum.triggerAttack('C4')
   }
 
-  triggerSnare () {
-    this.snareDrum.triggerAttack('C4')
+  triggerSnare (time, value) {
+    if (value) this.snareDrum.triggerAttack('C4')
   }
 
-  triggerHatClosed () {
-    this.Hats.triggerAttack('D4')
+  triggerHatClosed (time, value) {
+    if (value) this.Hats.triggerAttack('D4')
   }
 
-  triggerHatOpen () {
-    this.Hats.triggerAttack('C4')
-  }
-
-  
-  loopPlay () {
-    if (this.isPlaying) {
-      console.log ('stop playing')
-      this.isPlaying = !this.isPlaying
-      Tone.Transport.toggle()
-    } else {
-      console.log ('start playing')
-      this.isPlaying = !this.isPlaying
-      Tone.Transport.toggle()
-    }
+  triggerHatOpen (time, value) {
+    if (value) this.Hats.triggerAttack('C4')
   }
 
   render() {
@@ -88,7 +60,7 @@ export default class App extends React.Component {
           triggerHatOp={this.triggerHatOpen} 
           triggerHatCl={this.triggerHatClosed} 
         />
-        <Button onClick={this.loopPlay} color="primary"><PlayArrowIcon/></Button>
+        <Transport />
       </div>
     );
   }
