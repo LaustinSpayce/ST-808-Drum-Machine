@@ -8,6 +8,10 @@ export default class StepSequencer extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      tickPosition: -1
+    }
+
     this.closedHatArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
     this.openHatArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
     this.snareArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
@@ -17,6 +21,20 @@ export default class StepSequencer extends Component {
     this.openHatSeq = new Tone.Sequence((time, value) => {this.props.triggerHatOp(time, value)}, this.openHatArray.map((element) => {element.triggered}), "16n")
     this.kickSeq = new Tone.Sequence((time, value) => {this.props.triggerKick(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
     this.snareSeq = new Tone.Sequence((time, value) => {this.props.triggerSnare(time, value)}, this.snareArray.map((element) => {element.triggered}), "16n")
+
+    this.updateTC = this.updateTC.bind(this)
+    Tone.Transport.scheduleRepeat((time) => {Tone.Draw.schedule(this.updateTC, time)}, '16n')
+  }
+
+  updateTC () {
+    let currentTC = 0
+    if (Tone.Transport.state === 'stopped') {
+      currentTC = -1
+    } else {
+      currentTC = Tone.Transport.ticks
+      currentTC = Math.floor( currentTC / 48 )
+    }   
+    this.setState({ tickPosition: currentTC })
   }
 
   closedHatClicked(time, index) {
@@ -71,19 +89,19 @@ export default class StepSequencer extends Component {
     }
 
     let closedHatPads = this.closedHatArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} index={index} whenClicked={()=>{this.closedHatClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.closedHatClicked(array[index], index)}}/>
     })
 
     let openHatPads = this.openHatArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} index={index} whenClicked={()=>{this.openHatClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.openHatClicked(array[index], index)}}/>
     })
 
     let snarePads = this.snareArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} index={index} whenClicked={()=>{this.snareClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.snareClicked(array[index], index)}}/>
     })
 
     let kickPads = this.kickArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} index={index} whenClicked={()=>{this.kickClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.kickClicked(array[index], index)}}/>
     })
 
     return (

@@ -30,7 +30,6 @@ export default class Pad extends React.Component {
 
   }
 
-
   whenClicked() {
     this.props.clicked()
     let state = this.state
@@ -39,8 +38,9 @@ export default class Pad extends React.Component {
   }
 
   render () {
+    let content = this.props.currentTick === this.props.index ? "X" : ""
     return (
-      <PadBox onClick={() => {this.props.whenClicked()}}>{this.state.content}</PadBox>
+      <PadBox onClick={() => {this.props.whenClicked()}}>{content}</PadBox>
     )
   }
 }
