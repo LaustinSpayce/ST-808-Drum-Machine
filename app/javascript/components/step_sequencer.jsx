@@ -19,12 +19,6 @@ export default class StepSequencer extends Component {
     this.snareSeq = new Tone.Sequence((time, value) => {this.props.triggerSnare(time, value)}, this.snareArray.map((element) => {element.triggered}), "16n")
   }
 
-  // updateLoop() {
-  //   let kickSeqArray = this.kickArray.map((element)=>(element.triggered))
-  //   this.seq = new Tone.Sequence((time, value) => {this.triggerKick(time, value)}, kickSeqArray, "16n")
-  //   this.seq.start()
-  // }
-
   closedHatClicked(time, index) {
     this.closedHatSeq.removeAll()
     this.closedHatArray[index].triggered = !this.closedHatArray[index].triggered
