@@ -50,20 +50,20 @@ export default class App extends React.Component {
     this.osc.triggerAttackRelease('C4', '8n')
   }
 
-  triggerKick () {
-    this.kickDrum.triggerAttack('C4')
+  triggerKick (time, value) {
+    if (value) this.kickDrum.triggerAttack('C4')
   }
 
-  triggerSnare () {
-    this.snareDrum.triggerAttack('C4')
+  triggerSnare (time, value) {
+    if (value) this.snareDrum.triggerAttack('C4')
   }
 
-  triggerHatClosed () {
-    this.Hats.triggerAttack('D4')
+  triggerHatClosed (time, value) {
+    if (value) this.Hats.triggerAttack('D4')
   }
 
-  triggerHatOpen () {
-    this.Hats.triggerAttack('C4')
+  triggerHatOpen (time, value) {
+    if (value) this.Hats.triggerAttack('C4')
   }
 
   
