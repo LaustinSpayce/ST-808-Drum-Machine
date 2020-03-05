@@ -28,27 +28,8 @@ export default class Pad extends React.Component {
       content: ""
     }
 
-    this.updateTC = this.updateTC.bind(this)
-
-    Tone.Transport.scheduleRepeat(this.updateTC, '16n')
-
   }
 
-  updateTC () {
-    let index = this.state.activeIndex
-    if (index > 15) index = 0
-    if (Tone.Transport.state === "stopped") {
-      this.setState( {activeIndex: 0, content: "" })
-    } else {     
-      if (index === this.props.index) {
-        index++
-        this.setState( {content: "X", activeIndex: index} )
-      } else {
-        index++
-        this.setState( {content:"", activeIndex: index} )
-      }
-    }
-  }
 
   whenClicked() {
     this.props.clicked()
