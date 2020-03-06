@@ -3,7 +3,8 @@ import Tone from 'tone'
 import Button from '@material-ui/core/Button'
 import Pad from './pad'
 import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import { shadows } from '@material-ui/system'
 
 export default class StepSequencer extends Component {
   constructor(props) {
@@ -106,11 +107,13 @@ export default class StepSequencer extends Component {
     })
 
     return (
-      <Container>
-        <Button onClick={()=>{this.props.triggerHatOp(0,'C4')}}>Tssh</Button>{openHatPads}<br/>
-        <Button onClick={()=>{this.props.triggerHatCl(0,'C4')}}>Ts</Button>{closedHatPads}<br/>
-        <Button onClick={()=>{this.props.triggerSnare(0,'C4')}}>Piak</Button>{snarePads}<br/>
-        <Button onClick={()=>{this.props.triggerKick(0,'C4')}}>Boom</Button>{kickPads}<br/>
+      <Container fixed>
+        <Box boxShadow={3} align="center">
+          <Button onClick={()=>{this.props.triggerHatOp(0,'C4')}}>Tssh</Button>{openHatPads}<br/>
+          <Button onClick={()=>{this.props.triggerHatCl(0,'C4')}}>Ts</Button>{closedHatPads}<br/>
+          <Button onClick={()=>{this.props.triggerSnare(0,'C4')}}>Piak</Button>{snarePads}<br/>
+          <Button onClick={()=>{this.props.triggerKick(0,'C4')}}>Boom</Button>{kickPads}<br/>
+        </Box>
       </Container>
     )
   }
