@@ -3,6 +3,7 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import BPMControl from './transport/BPMControl'
 
 
 export default class Transport extends React.Component {
@@ -40,7 +41,8 @@ export default class Transport extends React.Component {
 
   render() {
     return (
-      <Container fixed >     
+      <Container fixed >
+          <BPMControl/> 
           <Button onClick={this.loopPlay} color="primary" bgcolor="success.main"><PlayArrowIcon/></Button>
           <p>{this.state.timePosition}</p>
       </Container>

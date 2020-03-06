@@ -15,7 +15,7 @@ export default class Kick extends Component {
       volume: 1
     }
 
-    this.kickSynth = new Tone.Oscillator().toMaster()
+    this.kickSynth = new Tone.MonoSynth( { oscillator: {type: 'sine'}}).toMaster()
     this.kickSynth.fadeOut = 0.01
     this.frequencyEnvelope = new Tone.ScaledEnvelope( { attack: 0.01, decay: this.state.decay, sustain: 1, release: 0.01 })
     this.frequencyEnvelope.min = 1
@@ -26,10 +26,8 @@ export default class Kick extends Component {
 
   triggerKickSynth(time, value) {
     if (value) {
-      this.kickSynth.start()
+      this.kickSynth.triggerAttackRelease(1, "16n" )
       this.frequencyEnvelope.triggerAttackRelease()
-      let stopKick = "+" + (this.state.decay + 0.25)
-      this.kickSynth.stop(stopKick)
     }
   }
 
