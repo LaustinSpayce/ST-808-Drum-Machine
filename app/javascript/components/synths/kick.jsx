@@ -36,7 +36,7 @@ export default class Kick extends Component {
   render() {
     return (
       <div>
-        <Button onClick={()=>{this.triggerKickSynth(0,"C4")}}>Boom</Button>
+        <Button onClick={()=>{this.triggerKickSynth(0,"C4")}} disabled>Boom</Button>
       </div>
     )
   }
