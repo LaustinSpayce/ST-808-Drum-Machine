@@ -41,7 +41,7 @@ export default class Transport extends React.Component {
   render() {
     return (
       <Container>
-        <Button onClick={this.loopPlay} color="primary"><PlayArrowIcon/></Button>
+        <Button onClick={this.loopPlay} color="primary" bgcolor="success.main"><PlayArrowIcon/></Button>
         <p>{this.state.timePosition}</p>
       </Container>
     )
