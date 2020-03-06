@@ -9,8 +9,8 @@ const PadBox = styled(Box)({
   border: '2px solid black',
   borderRadius: 3,
   color: 'black',
-  height: 48,
-  width: 48,
+  height: 24,
+  width: 24,
   padding: '2px',
   margin: '4px'
 });
