@@ -89,19 +89,19 @@ export default class StepSequencer extends Component {
     }
 
     let closedHatPads = this.closedHatArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.closedHatClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} clicked={()=>{this.closedHatClicked(array[index], index)}}/>
     })
 
     let openHatPads = this.openHatArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.openHatClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} clicked={()=>{this.openHatClicked(array[index], index)}}/>
     })
 
     let snarePads = this.snareArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.snareClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} clicked={()=>{this.snareClicked(array[index], index)}}/>
     })
 
     let kickPads = this.kickArray.map((state, index) => {
-      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} whenClicked={()=>{this.kickClicked(array[index], index)}}/>
+      return <Pad sound='closed hat' timing={array[index]} currentTick={this.state.tickPosition} index={index} clicked={()=>{this.kickClicked(array[index], index)}}/>
     })
 
     return (
