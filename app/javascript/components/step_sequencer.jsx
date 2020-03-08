@@ -29,21 +29,21 @@ export default class StepSequencer extends Component {
     this.snareSeq = new Tone.Sequence((time, value) => {this.triggerSnare(time, value)}, this.snareArray.map((element) => {element.triggered}), "16n")
     this.clapSeq = new Tone.Sequence((time, value) => {this.triggerClap(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
 
-    this.updateTC = this.updateTC.bind(this)
+    // this.updateTC = this.updateTC.bind(this)
     this.triggerClap = this.triggerClap.bind(this)
-    Tone.Transport.scheduleRepeat((time) => {Tone.Draw.schedule(this.updateTC, time)}, '16n')
+    // Tone.Transport.scheduleRepeat((time) => {Tone.Draw.schedule(this.updateTC, time)}, '16n')
   }
 
-  updateTC () {
-    let currentTC = 0
-    if (Tone.Transport.state === 'stopped') {
-      currentTC = -1
-    } else {
-      currentTC = Tone.Transport.ticks
-      currentTC = Math.floor( currentTC / 48 )
-    }   
-    this.setState({ tickPosition: currentTC })
-  }
+  // updateTC () {
+  //   let currentTC = 0
+  //   if (Tone.Transport.state === 'stopped') {
+  //     currentTC = -1
+  //   } else {
+  //     currentTC = Tone.Transport.ticks
+  //     currentTC = Math.floor( currentTC / 48 )
+  //   }   
+  //   this.setState({ tickPosition: currentTC })
+  // }
 
   closedHatClicked(time, index) {
     this.closedHatSeq.removeAll()

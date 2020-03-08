@@ -11,14 +11,14 @@ export default class Kick extends Component {
 
     this.state = {
       tone: 167.1,
-      decay: 0.5,
+      decay: 0.02,
       volume: 1,
       minTone: 41
     }
 
     this.kickSynth = new Tone.MonoSynth( { oscillator: {type: 'sine'}}).toMaster()
     this.kickSynth.fadeOut = 0.01
-    this.frequencyEnvelope = new Tone.ScaledEnvelope( { attack: 0.01, decay: this.state.decay, sustain: 1, release: 0.01 })
+    this.frequencyEnvelope = new Tone.ScaledEnvelope( { attack: 0.001, decay: this.state.decay, sustain: 1, release: 0.01 })
     this.frequencyEnvelope.min = this.state.minTone
     this.frequencyEnvelope.max = this.state.tone
     this.frequencyEnvelope.sustain = 0.01
