@@ -4,10 +4,13 @@ import Tone from 'tone'
 import TextField from '@material-ui/core/TextField'
 
 export default class BPMControl extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
-      BPM: Tone.Transport.bpm.value
+      BPM: Tone.Transport.bpm.value,
+      MAX_BPM: 250,
+      MIN_BPM: 30
     }
 
 
@@ -16,10 +19,14 @@ export default class BPMControl extends Component {
   
   handleBPMChange (event) {
     let newBPM = event.target.value
-    if (newBPM < 250 && newBPM > 30 ) {
-      Tone.Transport.bpm.value = newBPM
-      this.setState({ BPM: newBPM })
+    if (newBPM < this.state.MAX_BPM && newBPM > this.state.MIN_BPM ) {
+      Tone.Transport.bpm.value = newBPM   
+    } else if (newBPM > this.state.MAX_BPM) {
+      Tone.Transport.bpm.value = this.state.MAX_BPM
+    } else if (newBPM < this.state.MIN_BPM) {
+      Tone.Transport.bpm.value = this.state.MIN_BPM
     }
+      this.setState({ BPM: Tone.Transport.bpm.value })
   }
 
 

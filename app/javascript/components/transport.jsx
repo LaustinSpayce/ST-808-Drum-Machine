@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import BPMControl from './transport/BPMControl'
+import TimeSignature from './transport/TimeSignature'
 
 
 export default class Transport extends React.Component {
@@ -36,6 +37,8 @@ export default class Transport extends React.Component {
       Tone.Transport.toggle()
     } else {
       console.log ('start playing')
+      console.log(Tone.Transport.timeSignature)
+      console.log(Tone.Transport.loopEnd)
       this.setState({ isPlaying: true })
       Tone.Transport.toggle()
     }
@@ -47,6 +50,7 @@ export default class Transport extends React.Component {
           <BPMControl/> 
           <Button onClick={this.loopPlay} color="primary" bgcolor="success.main"><PlayArrowIcon/></Button>
           <p>{this.state.timePosition}</p>
+          <TimeSignature/>
       </Container>
     )
   }
