@@ -55,7 +55,7 @@ export default class Cowbell extends Component {
   render() {
     return (
       <div>
-        <Button onClick={()=>{this.triggerCowbellSynth(0,"C4")}}>Moo</Button>
+        <Button onClick={()=>{this.triggerCowbellSynth(0,"C4")}} disabled>Moo</Button>
       </div>
     )
   }

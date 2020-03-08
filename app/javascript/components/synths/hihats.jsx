@@ -44,8 +44,8 @@ export default class HiHats extends Component {
   render() {
     return (
       <div>
-        <Button onClick={()=>{this.triggerClosedHats(0,"C4")}}>Closed</Button><br/>
-        <Button onClick={()=>{this.triggerOpenHats(0,"C4")}}>Open</Button>
+        <Button onClick={()=>{this.triggerClosedHats(0,"C4")}} disabled>Closed</Button><br/>
+        <Button onClick={()=>{this.triggerOpenHats(0,"C4")}} disabled>Open</Button>
       </div>
     )
   }
