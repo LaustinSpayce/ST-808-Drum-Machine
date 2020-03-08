@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tone from 'tone'
 import Button from '@material-ui/core/Button'
+import SquareOscBank from './squareOscBank'
 
 // Both hats are inside this one class, and using the same synth as I want to
 // 'choke' the hat
@@ -20,23 +21,24 @@ export default class HiHats extends Component {
       }
     }
 
-    this.highPassFilter = new Tone.Filter(this.state.hiPassFilter, 'highpass').toMaster()
-    this.highPassFilter.Q = 100
-    this.hihatSynth = new Tone.NoiseSynth({noise: {type:'white'}, envelope: this.state.envelope}).connect(this.highPassFilter)
+    // this.highPassFilter = new Tone.Filter(this.state.hiPassFilter, 'highpass').toMaster()
+    // this.highPassFilter.Q = 100
+    // this.hihatSynth = new Tone.NoiseSynth({noise: {type:'white'}, envelope: this.state.envelope}).connect(this.highPassFilter)
+    this.oscBank = new SquareOscBank()
   }
 
   triggerClosedHats(time, value) {
     if (value) {
-      this.hihatSynth.envelope.release = this.state.closedHatDecay
-      this.hihatSynth.triggerAttackRelease('16n')
+      console.log('closed hats')
+      this.oscBank.triggerOscillators(time, true)
     }
     
   }
 
   triggerOpenHats(time, value) {
     if (value) {
-      this.hihatSynth.envelope.release = this.state.openHatDecay
-      this.hihatSynth.triggerAttackRelease('16n')
+      console.log('open hats')
+      this.oscBank.triggerOscillators(time, false)
     }
     
   }
