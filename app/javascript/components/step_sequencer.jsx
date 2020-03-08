@@ -8,6 +8,7 @@ import Clap from './synths/clap'
 import { shadows } from '@material-ui/system'
 import Kick from './synths/kick'
 import Snare from './synths/snare'
+import Cowbell from './synths/cowbell'
 
 export default class StepSequencer extends Component {
   constructor(props) {
@@ -22,12 +23,14 @@ export default class StepSequencer extends Component {
     this.snareArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
     this.kickArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
     this.clapArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
+    this.cowbellArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
 
     this.closedHatSeq = new Tone.Sequence((time, value) => {this.props.triggerHatCl(time, value)}, this.closedHatArray.map((element) => {element.triggered}), "16n")
     this.openHatSeq = new Tone.Sequence((time, value) => {this.props.triggerHatOp(time, value)}, this.openHatArray.map((element) => {element.triggered}), "16n")
     this.kickSeq = new Tone.Sequence((time, value) => {this.triggerKick(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
     this.snareSeq = new Tone.Sequence((time, value) => {this.triggerSnare(time, value)}, this.snareArray.map((element) => {element.triggered}), "16n")
     this.clapSeq = new Tone.Sequence((time, value) => {this.triggerClap(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
+    this.cowbellSeq = new Tone.Sequence((time, value) => {this.triggerCowbell(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
 
     // this.updateTC = this.updateTC.bind(this)
     this.triggerClap = this.triggerClap.bind(this)
@@ -97,6 +100,18 @@ export default class StepSequencer extends Component {
     this.refs.snare.triggerSnareSynth(time, value)
   }
 
+  cowbellClicked(time, index) {
+    this.cowbellSeq.removeAll()
+    this.cowbellArray[index].triggered = !this.cowbellArray[index].triggered
+    let cowbellSeqArray = this.cowbellArray.map((element) => (element.triggered))
+    this.cowbellSeq = new Tone.Sequence((time, value) => {this.triggerCowbell(time, value)}, cowbellSeqArray, "16n")
+    this.cowbellSeq.start(0)
+  }
+
+  triggerCowbell(time, value) {
+    this.refs.cowbell.triggerCowbellSynth(time, value)
+  }
+
   render() {
     let array = []
     let bars = 0
@@ -135,11 +150,16 @@ export default class StepSequencer extends Component {
       return <Pad sound='kick' timing={array[index]} currentTick={this.state.tickPosition} index={index} clicked={()=>{this.kickClicked(array[index], index)}}/>
     })
 
+    let cowbellPads = this.cowbellArray.map((state, index) => {
+      return <Pad sound='cowbell' timing={array[index]} currentTick={this.state.tickPosition} index={index} clicked={()=>{this.cowbellClicked(array[index], index)}}/>
+    })
+
     return (
       <Container fixed>
         <Box boxShadow={3} align="center">        
-          <Kick ref="kick">Boom</Kick><Clap ref="clap"/><Snare ref="snare"/>
+          <Kick ref="kick">Boom</Kick><Clap ref="clap"/><Snare ref="snare"/><Cowbell ref="cowbell"/>
           <hr/>
+          <Button onClick={()=>{this.triggerCowbell(0,'C4')}}>Moo</Button>{cowbellPads}<br/>
           <Button onClick={()=>{this.triggerClap(0,'C4')}}>Clap</Button>{clapPads}<br/>
           <Button onClick={()=>{this.props.triggerHatOp(0,'C4')}}>Tssh</Button>{openHatPads}<br/>
           <Button onClick={()=>{this.props.triggerHatCl(0,'C4')}}>Ts</Button>{closedHatPads}<br/>
