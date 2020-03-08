@@ -29,7 +29,6 @@ export default class HiHats extends Component {
 
   triggerClosedHats(time, value) {
     if (value) {
-      console.log('closed hats')
       this.oscBank.triggerOscillators(time, true)
     }
     
@@ -37,7 +36,6 @@ export default class HiHats extends Component {
 
   triggerOpenHats(time, value) {
     if (value) {
-      console.log('open hats')
       this.oscBank.triggerOscillators(time, false)
     }
     

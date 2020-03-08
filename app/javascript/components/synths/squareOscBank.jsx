@@ -14,12 +14,21 @@ export default class SquareOscBank extends Component {
       openDecay: 0.4,
     }
 
-    this.groupFilter = new Tone.Filter(5000, 'highpass', -24).toMaster()
+    this.groupFilter = new Tone.Filter(7000, 'highpass', -24).toMaster()
 
     this.oscBank = this.state.OSC_FREQUENCIES.map((frequency, index) => {
-      const osc = new Tone.MonoSynth({oscillator: {type: 'square'}, filter: {type: 'allpass'}
+      const osc = new Tone.MonoSynth({
+        oscillator: {type: 'square'}, 
+        filter: {type: 'allpass'}, 
+        envelope: {
+          attack : 0.005,
+          decay : 0.02,
+          sustain : 0.2,
+          release : 0.05
+
+      }
       }).connect(this.groupFilter)
-      osc.volume.value = -24
+      osc.volume.value = -12
       return osc
     })
   }
