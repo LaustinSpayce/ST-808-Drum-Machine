@@ -9,6 +9,7 @@ import { shadows } from '@material-ui/system'
 import Kick from './synths/kick'
 import Snare from './synths/snare'
 import Cowbell from './synths/cowbell'
+import HiHats from './synths/hihats'
 
 export default class StepSequencer extends Component {
   constructor(props) {
@@ -157,7 +158,7 @@ export default class StepSequencer extends Component {
     return (
       <Container fixed>
         <Box boxShadow={3} align="center">        
-          <Kick ref="kick">Boom</Kick><Clap ref="clap"/><Snare ref="snare"/><Cowbell ref="cowbell"/>
+          <Kick ref="kick">Boom</Kick><Clap ref="clap"/><Snare ref="snare"/><Cowbell ref="cowbell"/><HiHats ref="hihats"/>
           <hr/>
           <Button onClick={()=>{this.triggerCowbell(0,'C4')}}>Moo</Button>{cowbellPads}<br/>
           <Button onClick={()=>{this.triggerClap(0,'C4')}}>Clap</Button>{clapPads}<br/>
