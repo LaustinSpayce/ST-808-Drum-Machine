@@ -20,6 +20,8 @@ export default class Transport extends React.Component {
     this.updateTC = this.updateTC.bind(this)
 
     Tone.Transport.scheduleRepeat((time) => {Tone.Draw.schedule(this.updateTC, time)}, '16n')
+    Tone.Transport.loopEnd = '1m'
+    Tone.Transport.loop = true
   }
 
   updateTC () {
