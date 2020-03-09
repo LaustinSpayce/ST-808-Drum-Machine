@@ -57,29 +57,10 @@ export default function SynthControlPanel(props) {
               <SynthSlider values={props.variables[0]} />
             </Grid>
             <Grid item xs={5}>
-              {/* <Typography id="tone-slider" gutterBottom>
-                Tone Frequency: {this.state.minTone}
-              </Typography>
-              <Slider
-                aria-labelledby="tone-slider"
-                value={this.state.minTone}
-                max={this.state.toneLimits.maximum}
-                min={this.state.toneLimits.minimum}
-                marks={this.toneMarks}
-                step={0.01}
-                onChange={this.adjustTone} /> */}
+              <SynthSlider values={props.variables[1]} />
             </Grid>
             <Grid item xs={5}>
-              {/* <Typography id="note-length" gutterBottom>
-                Length: {this.state.noteLength.current}
-              </Typography>
-              <Slider
-                aria-labelledby="note-length"
-                value={this.state.noteLength.current}
-                max={this.state.noteLength.maximum}
-                min={this.state.noteLength.minimum}
-                step={0.01}
-                onChange={this.adjustNoteLength} /> */}
+              <SynthSlider values={props.variables[2]} />
             </Grid>
             <Grid item xs={5}>
               {/* <Typography id="decay-length" gutterBottom>

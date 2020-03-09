@@ -12,14 +12,17 @@ export default class Clap extends Component {
     super(props)
 
     this.state = {
-      volume: 0
+      volume: 0,
+      filterFrequency: 1000,
+      clapDelay: 0.025
     }
 
     this.adjustVolume = this.adjustVolume.bind(this)
     this.triggerClapSynth = this.triggerClapSynth.bind(this)
+    this.adjustFilterFrequency = this.adjustFilterFrequency.bind(this)
+    this.adjustClapDelay = this.adjustClapDelay.bind(this)
 
-
-    this.clapFilter = new Tone.Filter(1000, "bandpass").toMaster()
+    this.clapFilter = new Tone.Filter(this.state.filterFrequency, "bandpass").toMaster()
     this.clapSynth = new Tone.NoiseSynth().connect(this.clapFilter)
 
     this.volumeVariables = {
@@ -27,27 +30,61 @@ export default class Clap extends Component {
       minimumValue: -32,
       maximumValue: 6,
       defaultValue: 0,
-      currentValue: 0,
-      onChange: this.adjustVolume
+      currentValue: this.state.volume,
+      onChange: this.adjustVolume,
+      unit: "dB"
     }
 
-    this.allVariables=[this.volumeVariables,null,null,null]
+    this.filterVariables = {
+      name: "Filter Frequency",
+      minimumValue: 500,
+      maximumValue: 4000,
+      defaultValue: 1000,
+      currentValue: this.state.filterFrequency,
+      onChange: this.adjustFilterFrequency,
+      unit: "Hz"
+    }
+
+    this.clapDelayVariables = {
+      name: "Clap Delay",
+      minimumValue: 0.01,
+      maximumValue: 0.1,
+      defaultValue: 0.025,
+      currentValue: this.state.clapDelay,
+      onChange: this.adjustClapDelay,
+      unit: "Sec",
+      step: 0.001,
+      scale: (x => {Math.pow(10, x)})
+    }
+
+    this.allVariables=[this.volumeVariables,this.filterVariables,this.clapDelayVariables,null]
   }
 
   triggerClapSynth(time, value) {
     if (value) {
+      let firstDelay = "+" + this.state.clapDelay
+      let secondDelay = "+" + (2 * this.state.clapDelay)
       this.clapSynth.triggerAttackRelease('16n')
-      this.clapSynth.triggerAttackRelease('16n', "+0.025")
-      this.clapSynth.triggerAttackRelease('16n', "+0.05")
+      this.clapSynth.triggerAttackRelease('16n', firstDelay )
+      this.clapSynth.triggerAttackRelease('16n', secondDelay )
     }
     
   }
 
-    adjustVolume(event, value) {
-      let newVolume = Math.floor(value)
-      this.setState( {volume: newVolume } )
-      this.clapSynth.volume.linearRampTo(newVolume, '0.01')
-    }
+  adjustFilterFrequency(event, value) {
+    this.setState({filterFrequency: value})
+    this.clapFilter.frequency.value = value
+  }
+
+  adjustVolume(event, value) {
+    let newVolume = Math.floor(value)
+    this.setState( {volume: newVolume } )
+    this.clapSynth.volume.linearRampTo(newVolume, '0.01')
+  }
+
+  adjustClapDelay(event, value) {
+    this.setState({clapDelay: value})
+  }
 
   render() {
     return (
