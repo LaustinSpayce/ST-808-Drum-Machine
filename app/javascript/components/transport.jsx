@@ -32,7 +32,7 @@ export default function Transport() {
   }
 
     return (
-      <Grid container justify="space-around">
+      <Grid container justify="space-around" maxWidth="md">
         <Grid item xs={3}>
           <BPMControl/>
         </Grid>
