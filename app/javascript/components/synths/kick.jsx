@@ -145,7 +145,7 @@ export default class Kick extends Component {
             </Grid>
             <Grid item xs={5}>
               <Typography id="note-length" gutterBottom>
-                Length: {this.state.noteLength.current}
+                Note Length: {this.state.noteLength.current}
               </Typography>
               <Slider
                 aria-labelledby="note-length"
@@ -157,7 +157,7 @@ export default class Kick extends Component {
             </Grid>
             <Grid item xs={5}>
               <Typography id="decay-length" gutterBottom>
-                bend: {this.state.decay}
+                Tone Bend: {this.state.decay}
               </Typography>
               <Slider
                 aria-labelledby="decay-length"
