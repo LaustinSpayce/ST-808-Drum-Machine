@@ -33,6 +33,11 @@ export default class Kick extends Component {
       decay: 0.5,
       volume: 0,
       minTone: 41.20,
+      decayLength: {
+        minimum: 0.05,
+        maximum: 1,
+        default: 0.5
+      },
       noteLength: {
         minimum: 0.005,
         maximum: 1,
@@ -50,6 +55,7 @@ export default class Kick extends Component {
     this.adjustVolume = this.adjustVolume.bind(this)
     this.triggerKickSynth = this.triggerKickSynth.bind(this)
     this.adjustNoteLength = this.adjustNoteLength.bind(this)
+    this.adjustDecay = this.adjustDecay.bind(this)
   
     this.kickSynth = new Tone.MonoSynth( { oscillator: {type: 'sine'}}).toMaster()
     this.kickSynth.fadeOut = 0.01
@@ -99,6 +105,12 @@ export default class Kick extends Component {
     this.setState( { noteLength: noteLength })
   }
 
+  adjustDecay(event, value) {
+    let newDecayLength = value
+    this.frequencyEnvelope.decay = newDecayLength
+    this.setState( {decay: newDecayLength} )
+  }
+
   render() {
     return (  
       <ExpansionPanel>
@@ -136,16 +148,26 @@ export default class Kick extends Component {
               marks={this.toneMarks}
               step={0.01}
               onChange={this.adjustTone} /><br/>
-            <Typography id="tone-slider" gutterBottom>
+            <Typography id="note-length" gutterBottom>
               Length: {this.state.noteLength.current}
             </Typography>
             <Slider
-              aria-labelledby="tone-slider"
+              aria-labelledby="note-length"
               value={this.state.noteLength.current}
               max={this.state.noteLength.maximum}
               min={this.state.noteLength.minimum}
               step={0.01}
               onChange={this.adjustNoteLength} /><br/>
+              <Typography id="decay-length" gutterBottom>
+              bend: {this.state.decay}
+            </Typography>
+            <Slider
+              aria-labelledby="decay-length"
+              value={this.state.decay}
+              max={this.state.decayLength.maximum}
+              min={this.state.decayLength.minimum}
+              step={0.01}
+              onChange={this.adjustDecay} /><br/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )
