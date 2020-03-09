@@ -32,13 +32,13 @@ export default class Transport extends React.Component {
 
   loopPlay () {
     if (this.state.isPlaying) {
-      console.log ('stop playing')
+      // console.log ('stop playing')
       this.setState({ isPlaying: false })
       Tone.Transport.toggle()
     } else {
-      console.log ('start playing')
-      console.log(Tone.Transport.timeSignature)
-      console.log(Tone.Transport.loopEnd)
+      // console.log ('start playing')
+      // console.log(Tone.Transport.timeSignature)
+      // console.log(Tone.Transport.loopEnd)
       this.setState({ isPlaying: true })
       Tone.Transport.toggle()
     }

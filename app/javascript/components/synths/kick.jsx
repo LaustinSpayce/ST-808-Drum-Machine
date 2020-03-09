@@ -30,17 +30,31 @@ export default class Kick extends Component {
 
     this.state = {
       tone: 167.1,
-      decay: 0.02,
+      decay: 0.5,
       volume: 0,
-      minTone: 41
+      minTone: 41.20,
+      noteLength: {
+        minimum: 0.005,
+        maximum: 1,
+        default: 0.125,
+        current: 0.125
+      },
+      toneLimits: {
+        minimum: 20.60,
+        maximum: 82.41,
+        default: 41.20
+      }
     }
 
     this.adjustTone = this.adjustTone.bind(this)
     this.adjustVolume = this.adjustVolume.bind(this)
     this.triggerKickSynth = this.triggerKickSynth.bind(this)
+    this.adjustNoteLength = this.adjustNoteLength.bind(this)
   
     this.kickSynth = new Tone.MonoSynth( { oscillator: {type: 'sine'}}).toMaster()
     this.kickSynth.fadeOut = 0.01
+    this.kickSynth.envelope.release = 0.1
+    this.kickSynth.filterEnvelope.decay = 0.01
     this.frequencyEnvelope = new Tone.ScaledEnvelope( { attack: 0.001, decay: this.state.decay, sustain: 1, release: 0.01 })
     this.frequencyEnvelope.min = this.state.minTone
     this.frequencyEnvelope.max = this.state.tone
@@ -54,14 +68,14 @@ export default class Kick extends Component {
       {value: 6, label: '+6dB'}]
 
     this.toneMarks = [
-      {value: -32, label: '-32dB'},
-      {value: 0, label: '0dB'},
-      {value: 6, label: '+6dB'}]
+      {value: this.state.toneLimits.minimum, label: '20Hz (E0)'},
+      {value: this.state.toneLimits.default, label: '40Hz (E1)'},
+      {value: this.state.toneLimits.maximum, label: '80Hz (E2)'}]
   }
 
   triggerKickSynth(time, value) {
     if (value) {
-      this.kickSynth.triggerAttackRelease(1, "16n" )
+      this.kickSynth.triggerAttackRelease(1, this.state.noteLength.current )
       this.frequencyEnvelope.triggerAttackRelease()
     }
   }
@@ -69,13 +83,20 @@ export default class Kick extends Component {
   adjustVolume(event, value) {
     let newVolume = Math.floor(value)
     this.setState( { volume: newVolume } )
-    this.kickSynth.volume.value = newVolume
+    this.kickSynth.volume.linearRampTo(newVolume, '0.001')
   }
 
   adjustTone(event, value) {
     let newTone = value
-    this.setState( { tone: newTone } )
-    this.frequencyEnvelope.max = newTone
+    this.setState( { minTone: newTone } )
+    this.frequencyEnvelope.min = newTone
+  }
+
+  adjustNoteLength(event, value) {
+    let noteLength = this.state.noteLength
+    let newNoteLength = value
+    noteLength.current = newNoteLength
+    this.setState( { noteLength: noteLength })
   }
 
   render() {
@@ -105,15 +126,26 @@ export default class Kick extends Component {
               marks={this.volumeMarks}
               onChange={this.adjustVolume} /><br/>
             <Typography id="tone-slider" gutterBottom>
-              Tone Frequency: {this.state.tone}
+              Tone Frequency: {this.state.minTone}
             </Typography>
             <Slider
               aria-labelledby="tone-slider"
-              value={this.state.tone}
-              max={200}
-              min={100}
+              value={this.state.minTone}
+              max={this.state.toneLimits.maximum}
+              min={this.state.toneLimits.minimum}
               marks={this.toneMarks}
+              step={0.01}
               onChange={this.adjustTone} /><br/>
+            <Typography id="tone-slider" gutterBottom>
+              Length: {this.state.noteLength.current}
+            </Typography>
+            <Slider
+              aria-labelledby="tone-slider"
+              value={this.state.noteLength.current}
+              max={this.state.noteLength.maximum}
+              min={this.state.noteLength.minimum}
+              step={0.01}
+              onChange={this.adjustNoteLength} /><br/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )
