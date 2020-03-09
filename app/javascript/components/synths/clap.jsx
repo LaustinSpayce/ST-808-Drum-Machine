@@ -21,6 +21,7 @@ export default class Clap extends Component {
     this.triggerClapSynth = this.triggerClapSynth.bind(this)
     this.adjustFilterFrequency = this.adjustFilterFrequency.bind(this)
     this.adjustClapDelay = this.adjustClapDelay.bind(this)
+    this.adjustClapDecay = this.adjustClapDecay.bind(this)
 
     this.clapFilter = new Tone.Filter(this.state.filterFrequency, "bandpass").toMaster()
     this.clapSynth = new Tone.NoiseSynth().connect(this.clapFilter)
@@ -52,12 +53,27 @@ export default class Clap extends Component {
       defaultValue: 0.025,
       currentValue: this.state.clapDelay,
       onChange: this.adjustClapDelay,
-      unit: "Sec",
+      unit: "s",
       step: 0.001,
       scale: (x => {Math.pow(10, x)})
     }
 
-    this.allVariables=[this.volumeVariables,this.filterVariables,this.clapDelayVariables,null]
+    this.clapDecayVariables = {
+      name: "Clap Reverb",
+      minimumValue: 0.005,
+      maximumValue: 0.5,
+      defaultValue: 0.1,
+      currentValue: this.clapSynth.envelope.decay,
+      onChange: this.adjustClapDecay,
+      unit: "s",
+      step: 0.001
+    }
+
+    this.allVariables=[
+      this.volumeVariables,
+      this.filterVariables,
+      this.clapDelayVariables,
+      this.clapDecayVariables]
   }
 
   triggerClapSynth(time, value) {
@@ -69,6 +85,11 @@ export default class Clap extends Component {
       this.clapSynth.triggerAttackRelease('16n', secondDelay )
     }
     
+  }
+
+  adjustClapDecay(event, value) {
+    this.setState({clapDecay: value})
+    this.clapSynth.envelope.decay = value
   }
 
   adjustFilterFrequency(event, value) {

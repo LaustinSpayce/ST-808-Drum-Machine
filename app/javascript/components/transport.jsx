@@ -32,19 +32,21 @@ export default function Transport() {
   }
 
     return (
-      <Grid container justify="space-around" maxWidth="md">
-        <Grid item xs={3}>
-          <BPMControl/>
+      <Container maxWidth="lg">
+        <Grid container justify="space-around">
+          <Grid item xs={3}>
+            <BPMControl/>
+          </Grid>
+          <Grid item xs={3}>
+            <Button onClick={loopPlay} color="primary" bgcolor="success.main"><PlayArrowIcon/></Button>
+          </Grid>
+          <Grid item xs={3}>
+            <TCDisplay />
+          </Grid>
+          <Grid item xs={3}>
+            <TimeSignature/>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <Button onClick={loopPlay} color="primary" bgcolor="success.main"><PlayArrowIcon/></Button>
-        </Grid>
-        <Grid item xs={3}>
-          <TCDisplay />
-        </Grid>
-        <Grid item xs={3}>
-          <TimeSignature/>
-        </Grid>
-      </Grid>
+      </Container>
     )
 }
