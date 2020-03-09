@@ -9,32 +9,52 @@ import StepSequencer from '../components/step_sequencer'
 import { ThemeProvider } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Transport from '../components/transport'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles'
 
-export default class App extends React.Component {
-  constructor (props) {
-    super(props)
-
-    // Need to bind the functions here.
-    this.handleClick = this.handleClick.bind(this)
-
-    // Initialise the Samplers / Synths    
-    this.osc = new Tone.Synth().toMaster()
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '50vh',
+  },
+  main: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(14),
     
-  }
-  
-  handleClick () {
-    this.osc.triggerAttackRelease('C4', '8n')
-  }
+  },
+  footer: {
+    padding: theme.spacing(3, 2),
+    position: 'fixed',
+    bottom: '0',  
+    width: '100%',
+    backgroundColor:
+      theme.palette.type === 'dark' ? theme.palette.grey[800] : theme.palette.grey[200],
+  },
+}))
 
-  render() {
-    return (
-      <div>
-        <StepSequencer/>
+export default function App () {
+  const classes = useStyles()
+
+  // Initialise a Synth   
+  // osc = new Tone.Synth().toMaster()
+  // function handleClick () {
+  //   osc.triggerAttackRelease('C4', '8n')
+  // }
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <Container component="main" className={classes.main} maxWidth="md">
+        <StepSequencer />
+      </Container>
+      <footer className={classes.footer}>
         <Transport/>
-      </div>
-    );
-  }
-};
+      </footer>
+    </div>
+  )
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
