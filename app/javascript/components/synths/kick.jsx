@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Tone from 'tone'
 import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -10,21 +9,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Slider from '@material-ui/core/Slider'
 import Grid from '@material-ui/core/Grid'
 
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
-
 export default class Kick extends Component {
   constructor(props) {
     super(props)
-
 
     this.triggerKickSynth = this.triggerKickSynth.bind(this)
 
@@ -126,48 +113,61 @@ export default class Kick extends Component {
             onFocus={event => event.stopPropagation()}>Boom</Button>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            <Typography id="volume-slider" gutterBottom>
-              Volume: {this.state.volume}
-            </Typography>
-            <Slider
-              aria-labelledby="volume-slider"
-              value={this.state.volume}
-              scale={x => x ** 6}
-              max={6}
-              min={-32}
-              marks={this.volumeMarks}
-              onChange={this.adjustVolume} /><br/>
-            <Typography id="tone-slider" gutterBottom>
-              Tone Frequency: {this.state.minTone}
-            </Typography>
-            <Slider
-              aria-labelledby="tone-slider"
-              value={this.state.minTone}
-              max={this.state.toneLimits.maximum}
-              min={this.state.toneLimits.minimum}
-              marks={this.toneMarks}
-              step={0.01}
-              onChange={this.adjustTone} /><br/>
-            <Typography id="note-length" gutterBottom>
-              Length: {this.state.noteLength.current}
-            </Typography>
-            <Slider
-              aria-labelledby="note-length"
-              value={this.state.noteLength.current}
-              max={this.state.noteLength.maximum}
-              min={this.state.noteLength.minimum}
-              step={0.01}
-              onChange={this.adjustNoteLength} /><br/>
+          <Grid 
+            container 
+            spacing={6}
+            justify="space-around">
+            <Grid item xs={5}>
+              <Typography id="volume-slider" gutterBottom>
+                Volume: {this.state.volume}
+              </Typography>
+              <Slider
+                aria-labelledby="volume-slider"
+                value={this.state.volume}
+                scale={x => x ** 6}
+                max={6}
+                min={-32}
+                marks={this.volumeMarks}
+                onChange={this.adjustVolume} />
+            </Grid>
+            <Grid item xs={5}>
+              <Typography id="tone-slider" gutterBottom>
+                Tone Frequency: {this.state.minTone}
+              </Typography>
+              <Slider
+                aria-labelledby="tone-slider"
+                value={this.state.minTone}
+                max={this.state.toneLimits.maximum}
+                min={this.state.toneLimits.minimum}
+                marks={this.toneMarks}
+                step={0.01}
+                onChange={this.adjustTone} />
+            </Grid>
+            <Grid item xs={5}>
+              <Typography id="note-length" gutterBottom>
+                Length: {this.state.noteLength.current}
+              </Typography>
+              <Slider
+                aria-labelledby="note-length"
+                value={this.state.noteLength.current}
+                max={this.state.noteLength.maximum}
+                min={this.state.noteLength.minimum}
+                step={0.01}
+                onChange={this.adjustNoteLength} />
+            </Grid>
+            <Grid item xs={5}>
               <Typography id="decay-length" gutterBottom>
-              bend: {this.state.decay}
-            </Typography>
-            <Slider
-              aria-labelledby="decay-length"
-              value={this.state.decay}
-              max={this.state.decayLength.maximum}
-              min={this.state.decayLength.minimum}
-              step={0.01}
-              onChange={this.adjustDecay} /><br/>
+                bend: {this.state.decay}
+              </Typography>
+              <Slider
+                aria-labelledby="decay-length"
+                value={this.state.decay}
+                max={this.state.decayLength.maximum}
+                min={this.state.decayLength.minimum}
+                step={0.01}
+                onChange={this.adjustDecay} />
+              </Grid>
+          </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )
