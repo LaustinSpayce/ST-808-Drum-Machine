@@ -1,6 +1,22 @@
 import React, { Component } from 'react'
 import Tone from 'tone'
 import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/core/styles'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
 
 export default class Kick extends Component {
   constructor(props) {
@@ -34,9 +50,22 @@ export default class Kick extends Component {
 
   render() {
     return (
-      <div>
-        <Button onClick={()=>{this.triggerKickSynth(0,"C4")}} disabled>Boom</Button>
-      </div>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="kick-settings-header"
+          id="panel1a-header">
+          <Button 
+            onClick={(event)=>{
+              this.triggerKickSynth(0,"C4")
+              event.stopPropagation()
+            }}
+            onFocus={event => event.stopPropagation()}>Boom</Button>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          Here are the settings for Boom Boom Pow
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     )
   }
 }

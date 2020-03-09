@@ -13,11 +13,9 @@ export default class TimeSignature extends Component {
   }
 
   handleChange(event) {
-    console.log('time sig changed')
     let newTimeSignature = parseInt(event.target.value)
     if (newTimeSignature === 3 || newTimeSignature === 4) {
       Tone.Transport.timeSignature = newTimeSignature
-      console.log('new time signature')
       this.setState({ timeSignature: newTimeSignature })
       Tone.Transport.loopEnd = '1m'
     } else if (newTimeSignature < 3) {

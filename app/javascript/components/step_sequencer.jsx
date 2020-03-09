@@ -10,6 +10,7 @@ import Kick from './synths/kick'
 import Snare from './synths/snare'
 import Cowbell from './synths/cowbell'
 import HiHats from './synths/hihats'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 
 export default class StepSequencer extends Component {
   constructor(props) {
