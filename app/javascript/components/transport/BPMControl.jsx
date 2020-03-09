@@ -18,7 +18,7 @@ export default class BPMControl extends Component {
   }
   
   handleBPMChange (event) {
-    let newBPM = event.target.value
+    let newBPM = Math.floor(event.target.value)
     if (newBPM < this.state.MAX_BPM && newBPM > this.state.MIN_BPM ) {
       Tone.Transport.bpm.value = newBPM   
     } else if (newBPM > this.state.MAX_BPM) {
@@ -41,7 +41,7 @@ export default class BPMControl extends Component {
           InputLabelProps={{
             shrink: true,
           }}
-          defaultValue={this.state.BPM}
+          value={this.state.BPM}
           variant="outlined"
           onChange={(event)=>{this.handleBPMChange(event)}}
         />
