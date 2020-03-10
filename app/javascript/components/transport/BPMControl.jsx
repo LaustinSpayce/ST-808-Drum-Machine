@@ -10,7 +10,7 @@ export default class BPMControl extends Component {
     this.state = {
       BPM: Tone.Transport.bpm.value,
       MAX_BPM: 250,
-      MIN_BPM: 30
+      MIN_BPM: 1
     }
 
 
@@ -29,6 +29,10 @@ export default class BPMControl extends Component {
       this.setState({ BPM: Tone.Transport.bpm.value })
   }
 
+  handleKeyPress(event) {
+    if (event.key === 'Enter') { this.handleBPMChange(event) }
+  }
+
 
 
   render() {
@@ -38,12 +42,13 @@ export default class BPMControl extends Component {
           id="outlined-number"
           label="BPM"
           type="number"
+          defaultValue={this.state.BPM}
           InputLabelProps={{
             shrink: true,
           }}
-          value={this.state.BPM}
           variant="outlined"
-          onChange={(event)=>{this.handleBPMChange(event)}}
+          onBlur={(event)=>{this.handleBPMChange(event)}}
+          onKeyPress={(event) => {this.handleKeyPress(event)}}
         />
       </Box>
     )

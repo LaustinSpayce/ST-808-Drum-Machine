@@ -18,6 +18,7 @@ export default class Snare extends Component {
 
     this.allVariables = [
       ParameterAdjuster("Volume", -32, 6, 0, this.state.volume, this.adjustVolume, "dB"),
+      ParameterAdjuster("Tone", 100, 400, 200, this.state.frequency, this.adjustTone, "Hz", 1),
 
     ]
 
@@ -46,6 +47,11 @@ export default class Snare extends Component {
     this.snareSineSynth.volume.linearRampTo(newVolume, '0.01')
   }
 
+  adjusttone(event, value) {
+    this.setState( { frequency: value })
+    this.snareSineSynth.frequency.value = value
+  }
+
   triggerSnareSynth(time, value) {
     if (value) {
       this.snareNoiseSynth.triggerAttackRelease('16n')
@@ -65,7 +71,7 @@ export default class Snare extends Component {
           event.stopPropogation()
           }}>Piak</Button>
         </ExpansionPanelSummary>
-        <SynthControlPanel />
+        {/* <SynthControlPanel /> */}
       </ExpansionPanel>
     )
   }
