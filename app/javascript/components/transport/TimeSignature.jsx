@@ -1,45 +1,47 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Tone from 'tone'
 import TextField from '@material-ui/core/TextField'
 import Box from '@material-ui/core/Box'
+import { makeStyles } from '@material-ui/core/styles'
 
-export default class TimeSignature extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      timeSignature: Tone.Transport.timeSignature
-    }
+const useStyles = makeStyles ({
+  TimeSigDisplay: {
+    width: '100%',
+    height: '100%'
   }
+})
 
-  handleChange(event) {
+export default function TimeSignature () {
+  const classes = useStyles()
+  const [timeSignature, setTimeSignature] = useState(4)
+
+  function handleChange(event) {
     let newTimeSignature = parseInt(event.target.value)
     if (newTimeSignature === 3 || newTimeSignature === 4) {
       Tone.Transport.timeSignature = newTimeSignature
-      this.setState({ timeSignature: newTimeSignature })
+      setTimeSignature(newTimeSignature)
       Tone.Transport.loopEnd = '1m'
     } else if (newTimeSignature < 3) {
-      this.setState({ timeSignature: 3 })
+      setTimeSignature(3)
     } else if (newTimeSignature > 4) {
-      this.setState({timeSignature: 4})
+      setTimeSignature(4)
     }
   }
 
-  render() {
-    return (
-      <Box>
-        <TextField
-          id="outlined-number"
-          label="Time Signature"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={this.state.timeSignature}
-          variant="outlined"
-          onChange={(event)=>{this.handleChange(event)}}
-        />
-      </Box>
-    )
-  }
+  return (
+    <Box>
+      <TextField
+        className={classes.TimeSigDisplay}
+        id="outlined-number"
+        label="Time Signature"
+        type="number"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        value={timeSignature}
+        variant="outlined"
+        onChange={handleChange}
+      />
+    </Box>
+  )
 }

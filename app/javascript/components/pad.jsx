@@ -10,14 +10,14 @@ const useStyles = makeStyles({
   root: {
     display: 'inline-block',
     background: props =>
-      props.onBeat ? 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)' :
-      props.active ? 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+      props.onBeat ? 'linear-gradient(45deg, #81AB77 30%, #D5E3B8 90%)' :
+      props.active ? 'linear-gradient(45deg, #C53F52 30%, #EDAAB3 90%)'
         : 'linear-gradient(45deg, #444444 30%, #777777 90%)',
     border: 0,
     borderRadius: 3,
     boxShadow: props =>
-      props.onBeat ? '0 3px 5px 2px rgba(33, 203, 243, .3)' :
-      props.active ? '0 3px 5px 2px rgba(255, 105, 135, .3)' 
+      props.onBeat ? '0 3px 5px 2px rgba(129, 171, 119 .3)' :
+      props.active ? '0 3px 5px 2px rgba(197, 63, 82, .3)' 
         : '0 3px 5px 2px rgba(105, 105, 105, .3)',
     color: 'white',
     height: 32,

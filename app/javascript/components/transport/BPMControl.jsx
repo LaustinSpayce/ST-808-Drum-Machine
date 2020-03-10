@@ -2,12 +2,21 @@ import React, { useState } from 'react'
 import Box from '@material-ui/core/Box'
 import Tone from 'tone'
 import TextField from '@material-ui/core/TextField'
+import { makeStyles } from '@material-ui/core/styles'
 
 const MAX_BPM = 250
 const MIN_BPM = 1
 
+const useStyles = makeStyles({
+  BPMDisplay: {
+    width: '100%',
+    height: '100%'
+  }
+})
+
 export default function BPMControl(props) {
   const [BPM, setBPM] = useState(Tone.Transport.bpm.value)
+  const classes = useStyles()
 
   function handleBPMChange (event) {
     let newBPM = Math.floor(event.target.value)
@@ -32,6 +41,7 @@ export default function BPMControl(props) {
   return (
     <Box>
       <TextField
+        className={classes.BPMDisplay}
         id="outlined-number"
         label="BPM"
         type="number"

@@ -12,9 +12,20 @@ import Transport from '../components/transport'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+
+/* DOPELY COLOURS:
+#F7F7F7
+#EAE9E7
+#D1CDC9
+#959087
+#30303B
+*/
 
 const useStyles = makeStyles(theme => ({
   root: {
+    background: '#F7F7F7',
+    color: '#30303B',
     display: 'flex',
     flexDirection: 'column',
     minHeight: '50vh',
@@ -22,7 +33,6 @@ const useStyles = makeStyles(theme => ({
   main: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(14),
-    
   },
   footer: {
     padding: theme.spacing(3, 2),
@@ -30,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     bottom: '0',  
     width: '100%',
     backgroundColor:
-      theme.palette.type === 'dark' ? theme.palette.grey[800] : theme.palette.grey[200],
+      theme.palette.type === 'dark' ? '#D1CDC9' : '#EAE9E7',
   },
 }))
 
@@ -47,6 +57,9 @@ export default function App () {
     <div className={classes.root}>
       <CssBaseline />
       <Container component="main" className={classes.main} maxWidth="md">
+      <Typography variant="h2" gutterBottom>
+        ST-808
+      </Typography>
         <StepSequencer />
       </Container>
       <footer className={classes.footer}>

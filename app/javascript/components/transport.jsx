@@ -10,6 +10,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Link from '@material-ui/core/Link'
 import TCDisplay from './transport/TCDisplay'
 import Grid from '@material-ui/core/Grid'
+import PlayStopPause from './transport/PlayStopPause'
+import Shuffle from './transport/Shuffle'
 
 export default function Transport() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -31,19 +33,26 @@ export default function Transport() {
     }
   }
 
+  function stopPlay() {
+    Tone.Transport.stop()
+  }
+
     return (
       <Container maxWidth="lg">
-        <Grid container justify="space-around">
-          <Grid item xs={3}>
+        <Grid container justify="space-around" spacing={2}>
+          <Grid item xs={2}>
             <BPMControl/>
           </Grid>
+          <Grid item xs={2}>
+            <Shuffle />
+          </Grid>
           <Grid item xs={3}>
-            <Button onClick={loopPlay} color="primary" bgcolor="success.main"><PlayArrowIcon/></Button>
+            <PlayStopPause playToggle={loopPlay} stopButton={stopPlay} />
           </Grid>
           <Grid item xs={3}>
             <TCDisplay isPlaying={isPlaying}/> 
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <TimeSignature/>
           </Grid>
         </Grid>
