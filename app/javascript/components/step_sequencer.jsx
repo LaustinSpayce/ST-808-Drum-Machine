@@ -28,8 +28,8 @@ export default class StepSequencer extends Component {
     this.cowbellArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
     this.openHatArray = new Array(16).fill(null).map(()=>({ triggered: false, active: false }))
 
-    this.closedHatSeq = new Tone.Sequence((time, value) => {this.props.triggerHatCl(time, value)}, this.closedHatArray.map((element) => {element.triggered}), "16n")
-    this.openHatSeq = new Tone.Sequence((time, value) => {this.props.triggerHatOp(time, value)}, this.openHatArray.map((element) => {element.triggered}), "16n")
+    this.closedHatSeq = new Tone.Sequence((time, value) => {this.triggerHatCl(time, value)}, this.closedHatArray.map((element) => {element.triggered}), "16n")
+    this.openHatSeq = new Tone.Sequence((time, value) => {this.triggerHatOp(time, value)}, this.openHatArray.map((element) => {element.triggered}), "16n")
     this.kickSeq = new Tone.Sequence((time, value) => {this.triggerKick(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
     this.snareSeq = new Tone.Sequence((time, value) => {this.triggerSnare(time, value)}, this.snareArray.map((element) => {element.triggered}), "16n")
     this.clapSeq = new Tone.Sequence((time, value) => {this.triggerClap(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
