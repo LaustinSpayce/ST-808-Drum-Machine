@@ -13,19 +13,18 @@ export default class Snare extends Component {
 
     this.state = {
       frequency: 200,
-      volume: 0
+      volume: 0,
+      sineGain: 1,
+      decay: 0.1
     }
-
-    this.allVariables = [
-      ParameterAdjuster("Volume", -32, 6, 0, this.state.volume, this.adjustVolume, "dB"),
-      ParameterAdjuster("Tone", 100, 400, 200, this.state.frequency, this.adjustTone, "Hz", 1),
-
-    ]
 
     this.triggerSnareSynth = this.triggerSnareSynth.bind(this)
     this.adjustVolume = this.adjustVolume.bind(this)
+    this.adjustTone = this.adjustTone.bind(this)
+    this.adjustDecay = this.adjustDecay.bind(this)
+    this.adjustSineGain = this.adjustSineGain.bind(this)
 
-
+    this.sineGain = new Tone.Gain(this.state.sineGain).toMaster()
 
     this.snareNoiseSynth = new Tone.NoiseSynth().toMaster()
     this.snareSineSynth = new Tone.MonoSynth( {
@@ -36,8 +35,14 @@ export default class Snare extends Component {
         decay : 0.1 ,
         sustain : 0.005 ,
         release : 0.025
-        }}).toMaster()
-    
+        }}).connect(this.sineGain)
+
+    this.allVariables = [
+      ParameterAdjuster("Volume", -32, 6, 0, this.state.volume, this.adjustVolume, "dB"),
+      ParameterAdjuster("Tone", 100, 400, 200, this.state.frequency, this.adjustTone, "Hz", 1),
+      ParameterAdjuster("Snap", 0, 2, 1, this.state.sineGain, this.adjustSineGain, "", 0.01),
+      ParameterAdjuster("Decay", 0.005, 0.5, 0.1, this.state.decay, this.adjustDecay, "s", 0.001)
+    ]
   }
 
   adjustVolume(event, value) {
@@ -47,15 +52,25 @@ export default class Snare extends Component {
     this.snareSineSynth.volume.linearRampTo(newVolume, '0.01')
   }
 
-  adjusttone(event, value) {
+  adjustTone(event, value) {
     this.setState( { frequency: value })
     this.snareSineSynth.frequency.value = value
+  }
+
+  adjustSineGain(event, value) {
+    this.setState( { sineGain: value })
+    this.sineGain.gain.linearRampTo(value, '0.01')
+  }
+
+  adjustDecay(event, value) {
+    this.setState( { decay: value })
+    this.snareNoiseSynth.envelope.decay = value
   }
 
   triggerSnareSynth(time, value) {
     if (value) {
       this.snareNoiseSynth.triggerAttackRelease('16n')
-      this.snareSineSynth.triggerAttackRelease(this.state.frequency, '32n')
+      this.snareSineSynth.triggerAttackRelease(this.state.frequency, '16n')
     }
   }
 
@@ -68,10 +83,10 @@ export default class Snare extends Component {
           id="panel1a-header" >
           <Button onClick={(event) => {
             this.triggerSnareSynth(0,'C4')
-          event.stopPropogation()
+            event.stopPropagation()
           }}>Piak</Button>
         </ExpansionPanelSummary>
-        {/* <SynthControlPanel /> */}
+        <SynthControlPanel variables={this.allVariables} />
       </ExpansionPanel>
     )
   }
