@@ -1,56 +1,49 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Box from '@material-ui/core/Box'
 import Tone from 'tone'
 import TextField from '@material-ui/core/TextField'
 
-export default class BPMControl extends Component {
+const MAX_BPM = 250
+const MIN_BPM = 1
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      BPM: Tone.Transport.bpm.value,
-      MAX_BPM: 250,
-      MIN_BPM: 1
+export default function BPMControl(props) {
+  const [BPM, setBPM] = useState(Tone.Transport.bpm.value)
+
+  function handleBPMChange (event) {
+    let newBPM = Math.floor(event.target.value)
+    if (newBPM < MAX_BPM && newBPM > MIN_BPM ) {
+      Tone.Transport.bpm.value = newBPM   
+    } else if (newBPM > MAX_BPM) {
+      Tone.Transport.bpm.value = MAX_BPM
+    } else if (newBPM < MIN_BPM) {
+      Tone.Transport.bpm.value = MIN_BPM
     }
-
-
-    this.handleBPMChange = this.handleBPMChange.bind(this)
+    setBPM(Tone.Transport.bpm.value)
   }
   
-  handleBPMChange (event) {
-    let newBPM = Math.floor(event.target.value)
-    if (newBPM < this.state.MAX_BPM && newBPM > this.state.MIN_BPM ) {
-      Tone.Transport.bpm.value = newBPM   
-    } else if (newBPM > this.state.MAX_BPM) {
-      Tone.Transport.bpm.value = this.state.MAX_BPM
-    } else if (newBPM < this.state.MIN_BPM) {
-      Tone.Transport.bpm.value = this.state.MIN_BPM
-    }
-      this.setState({ BPM: Tone.Transport.bpm.value })
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') { handleBPMChange(event) }
   }
 
-  handleKeyPress(event) {
-    if (event.key === 'Enter') { this.handleBPMChange(event) }
+  function onInputChange(event) {
+    setBPM(event.target.value)
   }
 
-
-
-  render() {
-    return (
-      <Box>
-        <TextField
-          id="outlined-number"
-          label="BPM"
-          type="number"
-          defaultValue={this.state.BPM}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-          onBlur={(event)=>{this.handleBPMChange(event)}}
-          onKeyPress={(event) => {this.handleKeyPress(event)}}
-        />
-      </Box>
-    )
-  }
+  return (
+    <Box>
+      <TextField
+        id="outlined-number"
+        label="BPM"
+        type="number"
+        value={BPM}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+        onBlur={(event)=>{handleBPMChange(event)}}
+        onChange={(event) => {onInputChange(event)}}
+        onKeyPress={handleKeyPress}
+      />
+    </Box>
+  )
 }
