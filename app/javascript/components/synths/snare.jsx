@@ -78,9 +78,9 @@ export default class Snare extends Component {
     return (
       <ExpansionPanel>
         <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="clap-settings-header"
-          id="panel1a-header" >
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="clap-settings-header"
+            id="panel1a-header" >
           <Button onClick={(event) => {
             this.triggerSnareSynth(0,'C4')
             event.stopPropagation()
