@@ -8,24 +8,21 @@ import SynthSlider from './synthslider'
 
 export default function SynthControlPanel(props) {
 
+  const panels = props.variables.map((settings, index) => {
+    return (
+      <Grid item xs={5} key={index}>
+        <SynthSlider values={settings} />
+      </Grid>
+    )
+  })
+
   return (
     <ExpansionPanelDetails>
           <Grid 
             container 
             spacing={6}
             justify="space-around">
-            <Grid item xs={5}>
-              <SynthSlider values={props.variables[0]} />
-            </Grid>
-            <Grid item xs={5}>
-              <SynthSlider values={props.variables[1]} />
-            </Grid>
-            <Grid item xs={5}>
-              <SynthSlider values={props.variables[2]} />
-            </Grid>
-            <Grid item xs={5}>
-              <SynthSlider values={props.variables[3]} />
-              </Grid>
+              {panels}
           </Grid>
         </ExpansionPanelDetails>
   )

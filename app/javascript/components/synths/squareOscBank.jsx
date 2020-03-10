@@ -12,9 +12,10 @@ export default class SquareOscBank extends Component {
       },
       closedDecay: 0.005,
       openDecay: 0.4,
+      filterFreq: 7000
     }
 
-    this.groupFilter = new Tone.Filter(7000, 'highpass', -24).toMaster()
+    this.groupFilter = new Tone.Filter(this.state.filterFreq, 'highpass', -24).toMaster()
 
     this.oscBank = this.state.OSC_FREQUENCIES.map((frequency, index) => {
       const osc = new Tone.MonoSynth({
@@ -31,6 +32,9 @@ export default class SquareOscBank extends Component {
       osc.volume.value = -12
       return osc
     })
+
+    this.changeVolume = this.changeVolume.bind(this)
+    this.changeFilter = this.changeFilter.bind(this)
   }
 
   triggerOscillators(time, closed) {
@@ -38,5 +42,16 @@ export default class SquareOscBank extends Component {
     this.oscBank.forEach((osc, index) => {
       osc.triggerAttackRelease(this.state.OSC_FREQUENCIES[index], releaseTime)
     })
+  }
+
+  changeVolume(event, value) {
+    let adjustedValue = value - 12;
+    this.oscBank.forEach((osc, index) => {
+      osc.volume.linearRampTo(adjustedValue, '0.01')
+    })
+  }
+
+  changeFilter(event, value) {
+    this.groupFilter.frequency.linearRampTo(value, '0.01')
   }
 }

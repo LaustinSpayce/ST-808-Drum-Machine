@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Slider from '@material-ui/core/Slider'
 import Grid from '@material-ui/core/Grid'
+import ParameterAdjuster from '../helpers/parameteradjuster'
+import SynthControlPanel from '../synthcontrolpanel'
 
 export default class Kick extends Component {
   constructor(props) {
@@ -55,15 +57,12 @@ export default class Kick extends Component {
     this.frequencyEnvelope.connect(this.kickSynth.frequency)
     this.kickSynth.volume.value = this.state.volume
 
-    this.volumeMarks = [
-      {value: -32, label: '-32dB'},
-      {value: 0, label: '0dB'},
-      {value: 6, label: '+6dB'}]
-
-    this.toneMarks = [
-      {value: this.state.toneLimits.minimum, label: '20Hz (E0)'},
-      {value: this.state.toneLimits.default, label: '40Hz (E1)'},
-      {value: this.state.toneLimits.maximum, label: '80Hz (E2)'}]
+    this.allVariables = [
+      ParameterAdjuster("Volume", -32, 6, 0, this.state.volume, this.adjustVolume, "dB"),
+      ParameterAdjuster("Tone Freq", this.state.toneLimits.minimum, this.state.toneLimits.maximum, this.state.minTone, this.state.minTone, this.adjustTone, "Hz", 0.01),
+      ParameterAdjuster("Note Length", this.state.noteLength.minimum, this.state.noteLength.maximum, this.state.noteLength.current, this.state.noteLength.current, this.adjustNoteLength, "s", 0.01),
+      ParameterAdjuster("Decay Length", this.state.decayLength.minimum, this.state.decayLength.maximum, this.state.decay, this.state.decay, this.adjustDecay, "s", 0.01)
+    ]
   }
 
   triggerKickSynth(time, value) {
@@ -112,63 +111,7 @@ export default class Kick extends Component {
             }}
             onFocus={event => event.stopPropagation()}>Boom</Button>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Grid 
-            container 
-            spacing={6}
-            justify="space-around">
-            <Grid item xs={5}>
-              <Typography id="volume-slider" gutterBottom>
-                Volume: {this.state.volume}
-              </Typography>
-              <Slider
-                aria-labelledby="volume-slider"
-                value={this.state.volume}
-                scale={x => x ** 6}
-                max={6}
-                min={-32}
-                marks={this.volumeMarks}
-                onChange={this.adjustVolume} />
-            </Grid>
-            <Grid item xs={5}>
-              <Typography id="tone-slider" gutterBottom>
-                Tone Frequency: {this.state.minTone}
-              </Typography>
-              <Slider
-                aria-labelledby="tone-slider"
-                value={this.state.minTone}
-                max={this.state.toneLimits.maximum}
-                min={this.state.toneLimits.minimum}
-                marks={this.toneMarks}
-                step={0.01}
-                onChange={this.adjustTone} />
-            </Grid>
-            <Grid item xs={5}>
-              <Typography id="note-length" gutterBottom>
-                Note Length: {this.state.noteLength.current}
-              </Typography>
-              <Slider
-                aria-labelledby="note-length"
-                value={this.state.noteLength.current}
-                max={this.state.noteLength.maximum}
-                min={this.state.noteLength.minimum}
-                step={0.01}
-                onChange={this.adjustNoteLength} />
-            </Grid>
-            <Grid item xs={5}>
-              <Typography id="decay-length" gutterBottom>
-                Tone Bend: {this.state.decay}
-              </Typography>
-              <Slider
-                aria-labelledby="decay-length"
-                value={this.state.decay}
-                max={this.state.decayLength.maximum}
-                min={this.state.decayLength.minimum}
-                step={0.01}
-                onChange={this.adjustDecay} />
-              </Grid>
-          </Grid>
-        </ExpansionPanelDetails>
+          <SynthControlPanel variables={this.allVariables} />
       </ExpansionPanel>
     )
   }
