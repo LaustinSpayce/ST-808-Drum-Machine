@@ -41,7 +41,7 @@ export default function Transport() {
             <Button onClick={loopPlay} color="primary" bgcolor="success.main"><PlayArrowIcon/></Button>
           </Grid>
           <Grid item xs={3}>
-            <TCDisplay /> 
+            <TCDisplay isPlaying={isPlaying}/> 
           </Grid>
           <Grid item xs={3}>
             <TimeSignature/>
