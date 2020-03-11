@@ -13,6 +13,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import axios from 'axios'
 import SaveDialog from './helpers/savedialog'
+import LoadDialog from './helpers/loaddialog'
 
 // THIS FILE IS HORRIBLE
 
@@ -21,7 +22,8 @@ export default class StepSequencer extends Component {
     super(props)
 
     this.state = {
-      songID: 0
+      songID: 0,
+      loading: false
     }
 
     this.updateState = this.updateState.bind(this)
@@ -125,7 +127,11 @@ export default class StepSequencer extends Component {
   }
   
   loadBeat() {
-    console.log(this.state)
+    this.setState({loading: true})
+  }
+
+  loadFormSubmit(value) {
+    console.log(value)
   }
 
   async saveBeat() {
@@ -307,6 +313,7 @@ export default class StepSequencer extends Component {
           </Box>
         </Box>
         <SaveDialog songID={this.state.songID} />
+        <LoadDialog songID={this.state.songID} loading={this.state.loading} />
       </Container>
     )
   }
