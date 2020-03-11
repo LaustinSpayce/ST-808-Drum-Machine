@@ -12,6 +12,7 @@ import HiHats from './synths/hihats'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import axios from 'axios'
+import SaveDialog from './helpers/savedialog'
 
 // THIS FILE IS HORRIBLE
 
@@ -19,7 +20,9 @@ export default class StepSequencer extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      songID: 0
+    }
 
     this.updateState = this.updateState.bind(this)
     this.loadBeat = this.loadBeat.bind(this)
@@ -149,12 +152,10 @@ export default class StepSequencer extends Component {
     ]).then((response) => {
       // Pack the state into a JSON
       let stateObject = this.state
-      axios.post('/songs/', {song: stateObject })
-    }).then((response) => {
-      console.log(response)
-    }
-    ).catch((error) => {
-      console.log(error)
+      axios.post('/songs.json', { song: stateObject }
+      ).then((response) => {
+        this.setState({ songID: response.data.id })
+      })
     })
   }
 
@@ -305,6 +306,7 @@ export default class StepSequencer extends Component {
           </Button>{kickPads}
           </Box>
         </Box>
+        <SaveDialog songID={this.state.songID} />
       </Container>
     )
   }
