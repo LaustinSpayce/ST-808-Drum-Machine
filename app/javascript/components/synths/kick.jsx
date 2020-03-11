@@ -58,10 +58,10 @@ export default class Kick extends Component {
     this.kickSynth.volume.value = this.state.volume
 
     this.allVariables = [
-      ParameterAdjuster("Volume", -32, 6, 0, this.state.volume, this.adjustVolume, "dB"),
-      ParameterAdjuster("Tone Freq", this.state.toneLimits.minimum, this.state.toneLimits.maximum, this.state.minTone, this.state.minTone, this.adjustTone, "Hz", 0.01),
-      ParameterAdjuster("Note Length", this.state.noteLength.minimum, this.state.noteLength.maximum, this.state.noteLength.current, this.state.noteLength.current, this.adjustNoteLength, "s", 0.01),
-      ParameterAdjuster("Decay Length", this.state.decayLength.minimum, this.state.decayLength.maximum, this.state.decay, this.state.decay, this.adjustDecay, "s", 0.01)
+      ParameterAdjuster('Volume', -32, 6, 0, this.state.volume, this.adjustVolume, 'dB'),
+      ParameterAdjuster('Tone Freq', this.state.toneLimits.minimum, this.state.toneLimits.maximum, this.state.minTone, this.state.minTone, this.adjustTone, 'Hz', 0.01),
+      ParameterAdjuster('Note Length', this.state.noteLength.minimum, this.state.noteLength.maximum, this.state.noteLength.current, this.state.noteLength.current, this.adjustNoteLength, 's', 0.01),
+      ParameterAdjuster('Decay Length', this.state.decayLength.minimum, this.state.decayLength.maximum, this.state.decay, this.state.decay, this.adjustDecay, 's', 0.01)
     ]
   }
 
@@ -106,11 +106,11 @@ export default class Kick extends Component {
       <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="kick-settings-header"
-          id="panel1a-header">
+          aria-controls='kick-settings-header'
+          id='panel1a-header'>
           <Button 
             onClick={(event)=>{
-              this.triggerKickSynth(0,"C4")
+              this.triggerKickSynth(0,'C4')
               event.stopPropagation()
             }}
             onFocus={event => event.stopPropagation()}>Boom</Button>

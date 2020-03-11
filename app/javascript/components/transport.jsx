@@ -38,8 +38,8 @@ export default function Transport() {
   }
 
     return (
-      <Container maxWidth="lg">
-        <Grid container justify="space-around" spacing={2}>
+      <Container maxWidth='lg'>
+        <Grid container justify='space-around' spacing={2}>
           <Grid item xs={2}>
             <BPMControl/>
           </Grid>

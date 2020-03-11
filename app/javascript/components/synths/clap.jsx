@@ -24,49 +24,49 @@ export default class Clap extends Component {
     this.adjustClapDelay = this.adjustClapDelay.bind(this)
     this.adjustClapDecay = this.adjustClapDecay.bind(this)
 
-    this.clapFilter = new Tone.Filter(this.state.filterFrequency, "bandpass").toMaster()
+    this.clapFilter = new Tone.Filter(this.state.filterFrequency, 'bandpass').toMaster()
     this.clapSynth = new Tone.NoiseSynth().connect(this.clapFilter)
 
     this.volumeVariables = {
-      name: "Volume",
+      name: 'Volume',
       minimumValue: -32,
       maximumValue: 6,
       defaultValue: 0,
       currentValue: this.state.volume,
       onChange: this.adjustVolume,
-      unit: "dB"
+      unit: 'dB'
     }
 
     this.filterVariables = {
-      name: "Filter Frequency",
+      name: 'Filter Frequency',
       minimumValue: 500,
       maximumValue: 4000,
       defaultValue: 1000,
       currentValue: this.state.filterFrequency,
       onChange: this.adjustFilterFrequency,
-      unit: "Hz"
+      unit: 'Hz'
     }
 
     this.clapDelayVariables = {
-      name: "Clap Delay",
+      name: 'Clap Delay',
       minimumValue: 0.01,
       maximumValue: 0.1,
       defaultValue: 0.025,
       currentValue: this.state.clapDelay,
       onChange: this.adjustClapDelay,
-      unit: "s",
+      unit: 's',
       step: 0.001,
       scale: (x => {Math.pow(10, x)})
     }
 
     this.clapDecayVariables = {
-      name: "Clap Reverb",
+      name: 'Clap Reverb',
       minimumValue: 0.005,
       maximumValue: 0.5,
       defaultValue: 0.1,
       currentValue: this.clapSynth.envelope.decay,
       onChange: this.adjustClapDecay,
-      unit: "s",
+      unit: 's',
       step: 0.001
     }
 
@@ -79,8 +79,8 @@ export default class Clap extends Component {
 
   triggerClapSynth(time, value) {
     if (value) {
-      let firstDelay = "+" + this.state.clapDelay
-      let secondDelay = "+" + (2 * this.state.clapDelay)
+      let firstDelay = '+' + this.state.clapDelay
+      let secondDelay = '+' + (2 * this.state.clapDelay)
       this.clapSynth.triggerAttackRelease('16n')
       this.clapSynth.triggerAttackRelease('16n', firstDelay )
       this.clapSynth.triggerAttackRelease('16n', secondDelay )
@@ -117,8 +117,8 @@ export default class Clap extends Component {
       <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="clap-settings-header"
-          id="panel1a-header" >
+          aria-controls='clap-settings-header'
+          id='panel1a-header' >
           <Button
           onClick={(event) => {
             this.triggerClapSynth(0, 'C4')

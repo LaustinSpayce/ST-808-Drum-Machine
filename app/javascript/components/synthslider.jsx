@@ -13,11 +13,11 @@ export default function SynthSlider (props) {
 
   const sliderMarks = [
     { value: values.minimumValue, 
-      label: values.minimumValue + " " + values.unit},
+      label: values.minimumValue + ' ' + values.unit},
     { value: values.defaultValue,
-      label: values.defaultValue + " " + values.unit},
+      label: values.defaultValue + ' ' + values.unit},
     { value: values.maximumValue,
-      label: values.maximumValue + " " + values.unit}
+      label: values.maximumValue + ' ' + values.unit}
   ]
 
   return (

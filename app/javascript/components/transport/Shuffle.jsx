@@ -26,12 +26,12 @@ export default function Shuffle() {
   }
 
   useEffect(() => {
-    Tone.Transport.swingSubdivision = "8n"
+    Tone.Transport.swingSubdivision = '8n'
   }, [])
 
   return (
     <Box>
-      <Typography id="shuffle slider" gutterBottom>
+      <Typography id='shuffle slider' gutterBottom>
         Shuffle
       </Typography>
       <Slider

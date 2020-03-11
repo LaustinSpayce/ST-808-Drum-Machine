@@ -28,10 +28,10 @@ export default function PlayStopPause(props) {
 
   return (
     <Box
-    display="flex"
-    justifyContent="center"
-    alignItems="center" 
-    height="56px">
+    display='flex'
+    justifyContent='center'
+    alignItems='center' 
+    height='56px'>
       <Button onClick={props.playToggle} className={classes.playButton}>
         <PlayArrowIcon style={{ color: '#30303B' }}/>
       </Button>

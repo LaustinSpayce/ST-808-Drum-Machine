@@ -21,7 +21,7 @@ export default function SynthControlPanel(props) {
           <Grid 
             container 
             spacing={6}
-            justify="space-around">
+            justify='space-around'>
               {panels}
           </Grid>
         </ExpansionPanelDetails>

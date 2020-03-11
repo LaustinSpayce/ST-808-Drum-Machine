@@ -32,8 +32,8 @@ export default class HiHats extends Component {
     this.oscBank = new SquareOscBank()
 
     this.allVariables = [
-      ParameterAdjuster("Volume", -32, 6, 0, 0, this.oscBank.changeVolume, "dB"),
-      ParameterAdjuster("Filter Freq", 5000, 10000, 7000, 7000, this.oscBank.changeFilter, "Hz")
+      ParameterAdjuster('Volume', -32, 6, 0, 0, this.oscBank.changeVolume, 'dB'),
+      ParameterAdjuster('Filter Freq', 5000, 10000, 7000, 7000, this.oscBank.changeFilter, 'Hz')
     ]
   }
 
@@ -60,11 +60,11 @@ export default class HiHats extends Component {
       <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="clap-settings-header"
-          id="panel1a-header" >
+          aria-controls='clap-settings-header'
+          id='panel1a-header' >
         <Button 
         onClick={
-          (event)=>{this.triggerOpenHats(0,"C4")
+          (event)=>{this.triggerOpenHats(0,'C4')
           event.stopPropagation()
           }}
           onFocus={event => event.stopPropagation()}
@@ -73,7 +73,7 @@ export default class HiHats extends Component {
         </Button>
         <Button 
           onClick={
-            (event)=>{this.triggerClosedHats(0,"C4")
+            (event)=>{this.triggerClosedHats(0,'C4')
             event.stopPropagation()
           }} 
           onFocus={event => event.stopPropagation()}

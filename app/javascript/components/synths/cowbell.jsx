@@ -45,7 +45,7 @@ export default class Cowbell extends Component {
     this.adjustFrequency = this.adjustFrequency.bind(this)
     this.adjustFrequencyRatio = this.adjustFrequencyRatio.bind(this)
     
-    this.bandPassFilter = new Tone.Filter( this.state.BandPassFilterCutoff, "bandpass" ).toMaster()
+    this.bandPassFilter = new Tone.Filter( this.state.BandPassFilterCutoff, 'bandpass' ).toMaster()
 
     this.cowbellSynthLow = new Tone.MonoSynth( { oscillator: {type: 'square'}, envelope: this.state.ENVELOPE, filterEnvelope: this.state.FILTER_ENVELOPE}).connect(this.bandPassFilter)
     this.cowbellSynthLow.filter.type = 'allpass'
@@ -53,10 +53,10 @@ export default class Cowbell extends Component {
     this.cowbellSynthHigh.filter.type = 'allpass'
 
     this.allVariables = [
-      ParameterAdjuster("Volume", -32, 6, 0, this.state.volume, this.adjustVolume, "dB"),
-      ParameterAdjuster("Length", 0.05, 0.5, 0.1, this.state.cowbellLength, this.adjustLength, 's', 0.005),
-      ParameterAdjuster("Base Frequency", 400, 800, 555, this.state.lowFreq, this.adjustFrequency, 'Hz', 10),
-      ParameterAdjuster("Frequency Ratio", 1, 2, 1.504, this.state.frequencyRatio, this.adjustFrequencyRatio, "", 0.001)
+      ParameterAdjuster('Volume', -32, 6, 0, this.state.volume, this.adjustVolume, 'dB'),
+      ParameterAdjuster('Length', 0.05, 0.5, 0.1, this.state.cowbellLength, this.adjustLength, 's', 0.005),
+      ParameterAdjuster('Base Frequency', 400, 800, 555, this.state.lowFreq, this.adjustFrequency, 'Hz', 10),
+      ParameterAdjuster('Frequency Ratio', 1, 2, 1.504, this.state.frequencyRatio, this.adjustFrequencyRatio, '', 0.001)
     ]
   }
 
@@ -98,10 +98,10 @@ export default class Cowbell extends Component {
       <ExpansionPanel>
         <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="clap-settings-header"
-            id="panel1a-header" >
+            aria-controls='clap-settings-header'
+            id='panel1a-header' >
           <Button onClick={(event)=>{
-            this.triggerCowbellSynth(0,"C4")
+            this.triggerCowbellSynth(0,'C4')
             event.stopPropagation()
           }}>Moo</Button>
         </ExpansionPanelSummary>

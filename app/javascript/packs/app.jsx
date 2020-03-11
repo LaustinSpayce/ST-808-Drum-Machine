@@ -70,7 +70,7 @@ export default function App () {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Container component="main" className={classes.main} maxWidth="md">
+      <Container component='main' className={classes.main} maxWidth='md'>
       <Box className={classes.titleBox}>
         <Typography className={classes.title}>
           ST-808

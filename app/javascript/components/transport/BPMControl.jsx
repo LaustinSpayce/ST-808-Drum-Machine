@@ -42,14 +42,14 @@ export default function BPMControl(props) {
     <Box>
       <TextField
         className={classes.BPMDisplay}
-        id="outlined-number"
-        label="BPM"
-        type="number"
+        id='outlined-number'
+        label='BPM'
+        type='number'
         value={BPM}
         InputLabelProps={{
           shrink: true,
         }}
-        variant="outlined"
+        variant='outlined'
         onBlur={(event)=>{handleBPMChange(event)}}
         onChange={(event) => {onInputChange(event)}}
         onKeyPress={handleKeyPress}

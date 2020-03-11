@@ -31,13 +31,13 @@ export default class StepSequencer extends Component {
     this.cowbellArray = new Array(16).fill(null).map(()=>({ triggered: false }))
     this.openHatArray = new Array(16).fill(null).map(()=>({ triggered: false }))
 
-    this.closedHatSeq = new Tone.Sequence((time, value) => {this.triggerHatCl(time, value)}, this.closedHatArray.map((element) => {element.triggered}), "16n")
-    this.openHatSeq = new Tone.Sequence((time, value) => {this.triggerHatOp(time, value)}, this.openHatArray.map((element) => {element.triggered}), "16n")
-    this.kickSeq = new Tone.Sequence((time, value) => {this.triggerKick(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
-    this.snareSeq = new Tone.Sequence((time, value) => {this.triggerSnare(time, value)}, this.snareArray.map((element) => {element.triggered}), "16n")
-    this.clapSeq = new Tone.Sequence((time, value) => {this.triggerClap(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
-    this.cowbellSeq = new Tone.Sequence((time, value) => {this.triggerCowbell(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
-    this.openHatSeq = new Tone.Sequence((time, value) => {this.triggerOpenHat(time, value)}, this.kickArray.map((element) => {element.triggered}), "16n")
+    this.closedHatSeq = new Tone.Sequence((time, value) => {this.triggerHatCl(time, value)}, this.closedHatArray.map((element) => {element.triggered}), '16n')
+    this.openHatSeq = new Tone.Sequence((time, value) => {this.triggerHatOp(time, value)}, this.openHatArray.map((element) => {element.triggered}), '16n')
+    this.kickSeq = new Tone.Sequence((time, value) => {this.triggerKick(time, value)}, this.kickArray.map((element) => {element.triggered}), '16n')
+    this.snareSeq = new Tone.Sequence((time, value) => {this.triggerSnare(time, value)}, this.snareArray.map((element) => {element.triggered}), '16n')
+    this.clapSeq = new Tone.Sequence((time, value) => {this.triggerClap(time, value)}, this.kickArray.map((element) => {element.triggered}), '16n')
+    this.cowbellSeq = new Tone.Sequence((time, value) => {this.triggerCowbell(time, value)}, this.kickArray.map((element) => {element.triggered}), '16n')
+    this.openHatSeq = new Tone.Sequence((time, value) => {this.triggerOpenHat(time, value)}, this.kickArray.map((element) => {element.triggered}), '16n')
 
   }
 
@@ -45,7 +45,7 @@ export default class StepSequencer extends Component {
     this.clapSeq.removeAll()
     this.clapArray[index].triggered = !this.clapArray[index].triggered
     let clapSeqArray = this.clapArray.map((element) => (element.triggered))
-    this.clapSeq = new Tone.Sequence((time, value) => {this.triggerClap(time, value)}, clapSeqArray, "16n")
+    this.clapSeq = new Tone.Sequence((time, value) => {this.triggerClap(time, value)}, clapSeqArray, '16n')
     this.clapSeq.start(0)
   }
 
@@ -57,7 +57,7 @@ export default class StepSequencer extends Component {
     this.kickSeq.removeAll()
     this.kickArray[index].triggered = !this.kickArray[index].triggered
     let kickSeqArray = this.kickArray.map((element) => (element.triggered))
-    this.kickSeq = new Tone.Sequence((time, value) => {this.triggerKick(time, value)}, kickSeqArray, "16n")
+    this.kickSeq = new Tone.Sequence((time, value) => {this.triggerKick(time, value)}, kickSeqArray, '16n')
     this.kickSeq.start(0)
   }
 
@@ -69,7 +69,7 @@ export default class StepSequencer extends Component {
     this.snareSeq.removeAll()
     this.snareArray[index].triggered = !this.snareArray[index].triggered
     let snareSeqArray = this.snareArray.map((element) => (element.triggered))
-    this.snareSeq = new Tone.Sequence((time, value) => {this.triggerSnare(time, value)}, snareSeqArray, "16n")
+    this.snareSeq = new Tone.Sequence((time, value) => {this.triggerSnare(time, value)}, snareSeqArray, '16n')
     this.snareSeq.start(0)
   }
 
@@ -81,7 +81,7 @@ export default class StepSequencer extends Component {
     this.cowbellSeq.removeAll()
     this.cowbellArray[index].triggered = !this.cowbellArray[index].triggered
     let cowbellSeqArray = this.cowbellArray.map((element) => (element.triggered))
-    this.cowbellSeq = new Tone.Sequence((time, value) => {this.triggerCowbell(time, value)}, cowbellSeqArray, "16n")
+    this.cowbellSeq = new Tone.Sequence((time, value) => {this.triggerCowbell(time, value)}, cowbellSeqArray, '16n')
     this.cowbellSeq.start(0)
   }
 
@@ -94,7 +94,7 @@ export default class StepSequencer extends Component {
     this.openHatSeq.removeAll()
     this.openHatArray[index].triggered = !this.openHatArray[index].triggered
     let openHatSeqArray = this.openHatArray.map((element) => (element.triggered))
-    this.openHatSeq = new Tone.Sequence((time, value) => {this.triggerOpenHat(time, value)}, openHatSeqArray, "16n")
+    this.openHatSeq = new Tone.Sequence((time, value) => {this.triggerOpenHat(time, value)}, openHatSeqArray, '16n')
     this.openHatSeq.start(0)
   }
 
@@ -102,7 +102,7 @@ export default class StepSequencer extends Component {
     this.closedHatSeq.removeAll()
     this.closedHatArray[index].triggered = !this.closedHatArray[index].triggered
     let closedHatSeqArray = this.closedHatArray.map((element) => (element.triggered))
-    this.closedHatSeq = new Tone.Sequence((time, value) => {this.triggerClosedHat(time, value)}, closedHatSeqArray, "16n")
+    this.closedHatSeq = new Tone.Sequence((time, value) => {this.triggerClosedHat(time, value)}, closedHatSeqArray, '16n')
     this.closedHatSeq.start(0)
   }
 
@@ -149,7 +149,7 @@ export default class StepSequencer extends Component {
     let beats = 0
     let subbeats = 0
     for (let i = 1; i <= 16; i++) {
-      let string = bars + ":" + beats + ":" + subbeats
+      let string = bars + ':' + beats + ':' + subbeats
       array.push(string)
       subbeats++;
       if (subbeats === 4) {
@@ -187,27 +187,31 @@ export default class StepSequencer extends Component {
 
     return (
       <Container fixed>
-        <Box margin="1rem 0">
-          <Button margin="0 2rem 0 0" onClick={()=>{this.saveBeat()}}><CloudUploadIcon style={{ color: '#30303B' }}/></Button>
-          <Button onClick={this.loadBeat}><CloudDownloadIcon style={{ color: '#30303B' }}/></Button>
+        <Box margin='1rem 0'>
+          <Button 
+          variant='outlined'
+          onClick={()=>{this.saveBeat()}}><CloudUploadIcon style={{ color: '#30303B' }}/></Button>
+          <Button 
+          variant='outlined'
+          onClick={this.loadBeat}><CloudDownloadIcon style={{ color: '#30303B' }}/></Button>
         </Box>
 
-        <Box boxShadow={3} align="center" margin={"0 auto 1rem auto"}> 
-          <Cowbell ref="cowbell" updateState={this.updateState}/>
-          <Clap ref="clap" updateState={this.updateState}/>
-          <HiHats ref="hihats" updateState={this.updateState}/>
-          <Snare ref="snare" updateState={this.updateState}/>
-          <Kick ref="kick" updateState={this.updateState} />
+        <Box boxShadow={3} align='center' margin={'0 auto 1rem auto'}> 
+          <Cowbell ref='cowbell' updateState={this.updateState}/>
+          <Clap ref='clap' updateState={this.updateState}/>
+          <HiHats ref='hihats' updateState={this.updateState}/>
+          <Snare ref='snare' updateState={this.updateState}/>
+          <Kick ref='kick' updateState={this.updateState} />
         </Box>
 
-        <Box boxShadow={3} align="center" padding="1rem">
+        <Box boxShadow={3} align='center' padding='1rem'>
           <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="32px"
-          margin="8px auto">
-            <Button variant="outlined" 
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          height='32px'
+          margin='8px auto'>
+            <Button variant='outlined' 
               style={
                 { margin: '0 8px', width: '96px'}
               }
@@ -216,12 +220,12 @@ export default class StepSequencer extends Component {
             </Button>{cowbellPads}
           </Box>
           <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="32px"
-          margin="8px auto">
-          <Button variant="outlined" 
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          height='32px'
+          margin='8px auto'>
+          <Button variant='outlined' 
             style={
               { margin: '0 8px', width: '96px'}
             }
@@ -230,12 +234,12 @@ export default class StepSequencer extends Component {
           </Button>{clapPads}
           </Box>
           <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="32px"
-          margin="8px auto">
-          <Button variant="outlined" 
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          height='32px'
+          margin='8px auto'>
+          <Button variant='outlined' 
             style={
               { margin: '0 8px', width: '96px'}
             }
@@ -244,12 +248,12 @@ export default class StepSequencer extends Component {
           </Button>{openHatPads}
           </Box>
           <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="32px"
-          margin="8px auto">
-          <Button variant="outlined" 
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          height='32px'
+          margin='8px auto'>
+          <Button variant='outlined' 
             style={
               { margin: '0 8px', width: '96px'}
             }
@@ -258,12 +262,12 @@ export default class StepSequencer extends Component {
           </Button>{closedHatPads}
           </Box>
           <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="32px"
-          margin="8px auto">
-          <Button variant="outlined" 
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          height='32px'
+          margin='8px auto'>
+          <Button variant='outlined' 
             style={
               { margin: '0 8px', width: '96px'}
             }
@@ -272,12 +276,12 @@ export default class StepSequencer extends Component {
           </Button>{snarePads}
           </Box>
           <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="32px"
-          margin="8px auto">
-          <Button variant="outlined" 
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          height='32px'
+          margin='8px auto'>
+          <Button variant='outlined' 
             style={
               { margin: '0 8px', width: '96px'}
             }

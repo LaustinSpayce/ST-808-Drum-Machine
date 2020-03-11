@@ -38,10 +38,10 @@ export default class Snare extends Component {
         }}).connect(this.sineGain)
 
     this.allVariables = [
-      ParameterAdjuster("Volume", -32, 6, 0, this.state.volume, this.adjustVolume, "dB"),
-      ParameterAdjuster("Tone", 100, 400, 200, this.state.frequency, this.adjustTone, "Hz", 1),
-      ParameterAdjuster("Snap", 0, 2, 1, this.state.sineGain, this.adjustSineGain, "", 0.01),
-      ParameterAdjuster("Decay", 0.005, 0.5, 0.1, this.state.decay, this.adjustDecay, "s", 0.001)
+      ParameterAdjuster('Volume', -32, 6, 0, this.state.volume, this.adjustVolume, 'dB'),
+      ParameterAdjuster('Tone', 100, 400, 200, this.state.frequency, this.adjustTone, 'Hz', 1),
+      ParameterAdjuster('Snap', 0, 2, 1, this.state.sineGain, this.adjustSineGain, '', 0.01),
+      ParameterAdjuster('Decay', 0.005, 0.5, 0.1, this.state.decay, this.adjustDecay, 's', 0.001)
     ]
   }
 
@@ -83,8 +83,8 @@ export default class Snare extends Component {
       <ExpansionPanel>
         <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="clap-settings-header"
-            id="panel1a-header" >
+            aria-controls='clap-settings-header'
+            id='panel1a-header' >
           <Button onClick={(event) => {
             this.triggerSnareSynth(0,'C4')
             event.stopPropagation()

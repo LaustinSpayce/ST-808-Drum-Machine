@@ -32,14 +32,14 @@ export default function TimeSignature () {
     <Box>
       <TextField
         className={classes.TimeSigDisplay}
-        id="outlined-number"
-        label="Time Signature"
-        type="number"
+        id='outlined-number'
+        label='Time Signature'
+        type='number'
         InputLabelProps={{
           shrink: true,
         }}
         value={timeSignature}
-        variant="outlined"
+        variant='outlined'
         onChange={handleChange}
       />
     </Box>
