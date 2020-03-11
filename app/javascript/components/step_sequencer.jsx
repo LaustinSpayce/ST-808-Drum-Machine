@@ -149,9 +149,17 @@ export default class StepSequencer extends Component {
 
     return (
       <Container fixed>
+        <Button>SAVE</Button>
+        <Button>LOAD</Button>
+
         <Box boxShadow={3} align="center" margin={"0 auto 1rem auto"}>        
-          <Kick ref="kick">Boom</Kick><Clap ref="clap"/><Snare ref="snare"/><Cowbell ref="cowbell"/><HiHats ref="hihats"/>
+          <Kick ref="kick">Boom</Kick>
+          <Clap ref="clap"/>
+          <Snare ref="snare"/>
+          <Cowbell ref="cowbell"/>
+          <HiHats ref="hihats"/>
         </Box>
+
         <Box boxShadow={3} align="center" padding="1rem">
           <Box
           display="flex"

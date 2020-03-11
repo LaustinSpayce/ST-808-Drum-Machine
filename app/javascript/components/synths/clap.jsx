@@ -104,7 +104,7 @@ export default class Clap extends Component {
   }
 
   adjustClapDelay(event, value) {
-    this.setState({clapDelay: value})
+    this.setState({clapDelay: value}, () => {this.props.updateState({clap: this.state})})
   }
 
   render() {
