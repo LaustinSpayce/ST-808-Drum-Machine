@@ -6,4 +6,19 @@ The ST-808 is an online Drum Machine for making beats or baking meats when you d
 
 ## Installation
 
-For some insane reason I was originally going to include a backend. This got cut early in development, but still pushed ahead
+Install rails
+Configure the database with:
+```
+bundle install
+yarn install
+rails db:create
+rails db:migrate
+```
+Should do the trick.
+Saving/Loading isn't working at the moment, so this is pretty much a purely react app.
+
+## Justification
+I wanted to play with Tone.js and create something fun, inspired by the classic Roland TR-808 and other online projects such as the IO808.
+
+## Technologies
+Rails, React, Robots
