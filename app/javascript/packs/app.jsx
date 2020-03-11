@@ -13,6 +13,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { sizing } from '@material-ui/system'
 
 /* DOPELY COLOURS:
 #F7F7F7

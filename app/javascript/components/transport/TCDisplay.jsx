@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     justifyContent: 'center'
   },
   TCText: {
+    
     margin: '0px auto',
     fontSize: '2rem',
     width: 128
