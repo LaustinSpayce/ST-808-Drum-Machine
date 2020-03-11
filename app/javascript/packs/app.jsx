@@ -55,6 +55,12 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700,
     color: '#C53F52',
     fontSize: '3rem'
+  },
+  link: {
+    '&:hover': {
+      borderBottomColor: '#cdcde7',
+      background: 'pink',
+    }
   }
 }))
 
@@ -70,6 +76,7 @@ export default function App () {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      
       <Container component='main' className={classes.main} maxWidth='md'>
       <Box className={classes.titleBox}>
         <Typography className={classes.title}>

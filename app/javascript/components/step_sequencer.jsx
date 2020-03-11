@@ -14,6 +14,8 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import axios from 'axios'
 import SaveDialog from './helpers/savedialog'
 import LoadDialog from './helpers/loaddialog'
+import GitHubIcon from '@material-ui/icons/GitHub'
+import Link from '@material-ui/core/Link'
 
 // THIS FILE IS HORRIBLE
 
@@ -217,7 +219,15 @@ export default class StepSequencer extends Component {
           <Button 
           variant='outlined'
           onClick={this.loadBeat}
-          disabled><CloudDownloadIcon style={{ color: '#30303B' }}/></Button>
+          disabled><CloudDownloadIcon style={{ color: '#30303B' }}/>
+          </Button>
+            <Link color='textPrimary' underline='always'
+            m="0 2rem"
+            component='button'
+            style={{ '&:hover': { backgroundColor: 'pink' }}}
+            href="https://github.com/LaustinSpayce/ST-808-Drum-Machine" > 
+                <GitHubIcon />
+            </Link>
         </Box>
 
         <Box boxShadow={3} align='center' margin={'0 auto 1rem auto'}> 
