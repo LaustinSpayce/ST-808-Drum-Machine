@@ -148,18 +148,65 @@ export default class StepSequencer extends Component {
     })
 
     return (
-      <Container fixed minWidth='912px'>
-        <Box boxShadow={3} align="center">        
+      <Container fixed>
+        <Box boxShadow={3} align="center" margin={"0 auto 1rem auto"}>        
           <Kick ref="kick">Boom</Kick><Clap ref="clap"/><Snare ref="snare"/><Cowbell ref="cowbell"/><HiHats ref="hihats"/>
         </Box>
-        <hr />
-        <Box boxShadow={3} align="center">
-          <Button onClick={()=>{this.triggerCowbell(0,'C4')}}>Moo</Button>{cowbellPads}<br/>
-          <Button onClick={()=>{this.triggerClap(0,'C4')}}>Clap</Button>{clapPads}<br/>
-          <Button onClick={()=>{this.triggerOpenHat(0,'C4')}}>Tssh</Button>{openHatPads}<br/>
-          <Button onClick={()=>{this.triggerClosedHat(0,'C4')}}>Ts</Button>{closedHatPads}<br/>
-          <Button onClick={()=>{this.triggerSnare(0,'C4')}}>Piak</Button>{snarePads}<br/>
-          <Button onClick={()=>{this.triggerKick(0, 'C4')}}>Boom</Button>{kickPads}<br/>
+        <Box boxShadow={3} align="center" padding="1rem">
+          <Box>
+            <Button variant="outlined" 
+              style={
+                { margin: '0 8px', width: '96px'}
+              }
+              onClick={()=>{this.triggerCowbell(0,'C4')}}
+              >Moo
+            </Button>{cowbellPads}
+          </Box>
+          <Box>
+          <Button variant="outlined" 
+            style={
+              { margin: '0 8px', width: '96px'}
+            }
+            onClick={()=>{this.triggerClap(0,'C4')}}
+            >Clap
+          </Button>{clapPads}
+          </Box>
+          <Box>
+          <Button variant="outlined" 
+            style={
+              { margin: '0 8px', width: '96px'}
+            }
+            onClick={()=>{this.triggerOpenHat(0,'C4')}}
+            >Tssh
+          </Button>{openHatPads}
+          </Box>
+          <Box>
+          <Button variant="outlined" 
+            style={
+              { margin: '0 8px', width: '96px'}
+            }
+            onClick={()=>{this.triggerClosedHat(0,'C4')}}
+            >Ts
+          </Button>{closedHatPads}
+          </Box>
+          <Box>
+          <Button variant="outlined" 
+            style={
+              { margin: '0 8px', width: '96px'}
+            }
+            onClick={()=>{this.triggerSnare(0,'C4')}}
+            >Piak
+          </Button>{snarePads}
+          </Box>
+          <Box>
+          <Button variant="outlined" 
+            style={
+              { margin: '0 8px', width: '96px'}
+            }
+            onClick={()=>{this.triggerKick(0, 'C4')}}
+            >Boom
+          </Button>{kickPads}
+          </Box>
         </Box>
       </Container>
     )

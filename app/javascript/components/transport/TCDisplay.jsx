@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles({
   TCDisplay: {
+    fontFamily: ['Roboto-mono', 'Monaco', 'monospace'],
     background: '#30303B',
     color: '#F7F7F7',
     width: '100%',
@@ -18,10 +19,9 @@ const useStyles = makeStyles({
     justifyContent: 'center'
   },
   TCText: {
-    
     margin: '0px auto',
     fontSize: '2rem',
-    width: 128
+    width: 192
   }
 })
 

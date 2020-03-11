@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { sizing } from '@material-ui/system'
+import Box from '@material-ui/core/Box'
 
 /* DOPELY COLOURS:
 #F7F7F7
@@ -43,6 +44,18 @@ const useStyles = makeStyles(theme => ({
     backgroundColor:
       theme.palette.type === 'dark' ? '#D1CDC9' : '#EAE9E7',
   },
+  titleBox: {
+    borderBottom: 3,
+    borderBottomStyle: 'solid',
+    borderBottomColor: '#C53F52',
+    width: '100%',
+    margin: '0 auto 1rem auto'
+  },
+  title: {
+    fontWeight: 700,
+    color: '#C53F52',
+    fontSize: '3rem'
+  }
 }))
 
 export default function App () {
@@ -58,9 +71,11 @@ export default function App () {
     <div className={classes.root}>
       <CssBaseline />
       <Container component="main" className={classes.main} maxWidth="md">
-      <Typography variant="h2" gutterBottom>
-        ST-808
-      </Typography>
+      <Box className={classes.titleBox}>
+        <Typography className={classes.title}>
+          ST-808
+        </Typography>
+      </Box>
         <StepSequencer />
       </Container>
       <footer className={classes.footer}>
