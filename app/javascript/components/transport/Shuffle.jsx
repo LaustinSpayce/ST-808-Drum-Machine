@@ -23,7 +23,6 @@ export default function Shuffle() {
   function handleShuffleChange (event, value) {
     setSwing(value)
     Tone.Transport.swing = value
-    console.log(Tone.Transport.swing)
   }
 
   useEffect(() => {

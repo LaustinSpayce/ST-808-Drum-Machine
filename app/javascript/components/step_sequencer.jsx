@@ -153,7 +153,12 @@ export default class StepSequencer extends Component {
           <Kick ref="kick">Boom</Kick><Clap ref="clap"/><Snare ref="snare"/><Cowbell ref="cowbell"/><HiHats ref="hihats"/>
         </Box>
         <Box boxShadow={3} align="center" padding="1rem">
-          <Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="32px"
+          margin="8px auto">
             <Button variant="outlined" 
               style={
                 { margin: '0 8px', width: '96px'}
@@ -162,7 +167,12 @@ export default class StepSequencer extends Component {
               >Moo
             </Button>{cowbellPads}
           </Box>
-          <Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="32px"
+          margin="8px auto">
           <Button variant="outlined" 
             style={
               { margin: '0 8px', width: '96px'}
@@ -171,7 +181,12 @@ export default class StepSequencer extends Component {
             >Clap
           </Button>{clapPads}
           </Box>
-          <Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="32px"
+          margin="8px auto">
           <Button variant="outlined" 
             style={
               { margin: '0 8px', width: '96px'}
@@ -180,7 +195,12 @@ export default class StepSequencer extends Component {
             >Tssh
           </Button>{openHatPads}
           </Box>
-          <Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="32px"
+          margin="8px auto">
           <Button variant="outlined" 
             style={
               { margin: '0 8px', width: '96px'}
@@ -189,7 +209,12 @@ export default class StepSequencer extends Component {
             >Ts
           </Button>{closedHatPads}
           </Box>
-          <Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="32px"
+          margin="8px auto">
           <Button variant="outlined" 
             style={
               { margin: '0 8px', width: '96px'}
@@ -198,7 +223,12 @@ export default class StepSequencer extends Component {
             >Piak
           </Button>{snarePads}
           </Box>
-          <Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="32px"
+          margin="8px auto">
           <Button variant="outlined" 
             style={
               { margin: '0 8px', width: '96px'}

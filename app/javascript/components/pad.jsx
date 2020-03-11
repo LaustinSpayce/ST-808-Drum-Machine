@@ -20,9 +20,9 @@ const useStyles = makeStyles({
       props.active ? '0 3px 5px 2px rgba(197, 63, 82, .3)' 
         : '0 3px 5px 2px rgba(105, 105, 105, .3)',
     color: 'white',
-    height: 32,
-    width: 32,
-    margin: '0px 4px'
+    height: 36,
+    width: 36,
+    margin: '0px 2px'
   },
   active: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
