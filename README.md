@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The ST-808 is an online Drum Machine for making beats or baking meats when you don't have hardware or software synths to hand.
 
-Things you may want to cover:
+![ST-808 screenshot](/planning/ST-808inAction.png)
 
-* Ruby version
+## Installation
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+For some insane reason I was originally going to include a backend. This got cut early in development, but still pushed ahead
