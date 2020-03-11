@@ -80,7 +80,7 @@ export default class HiHats extends Component {
           >
             CL
         </Button>
-          HATS
+          <Button disabled>HATS</Button>
         </ExpansionPanelSummary>
         <SynthControlPanel variables={this.allVariables} />
       </ExpansionPanel>

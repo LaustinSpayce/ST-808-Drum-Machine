@@ -212,10 +212,12 @@ export default class StepSequencer extends Component {
         <Box margin='1rem 0'>
           <Button 
           variant='outlined'
-          onClick={()=>{this.saveBeat()}}><CloudUploadIcon style={{ color: '#30303B' }}/></Button>
+          onClick={()=>{this.saveBeat()}}
+          disabled><CloudUploadIcon style={{ color: '#30303B' }}/></Button>
           <Button 
           variant='outlined'
-          onClick={this.loadBeat}><CloudDownloadIcon style={{ color: '#30303B' }}/></Button>
+          onClick={this.loadBeat}
+          disabled><CloudDownloadIcon style={{ color: '#30303B' }}/></Button>
         </Box>
 
         <Box boxShadow={3} align='center' margin={'0 auto 1rem auto'}> 

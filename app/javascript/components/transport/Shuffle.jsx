@@ -41,7 +41,7 @@ export default function Shuffle() {
         max={MAX_SWING}
         min={MIN_SWING}
         step={0.01}
-        />
+        disabled />
     </Box>
   )
 }

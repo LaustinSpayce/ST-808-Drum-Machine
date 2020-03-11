@@ -37,7 +37,7 @@ export default function LoadDialog(props) {
         <DialogTitle id='alert-dialog-slide-title'>{'Load Song'}</DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-slide-description'>
-            Please enter Song ID to load:
+            Thank you for clicking this button. This action is a work in progress so please check back again soon to load your song!
           </DialogContentText>
           <TextField
             autoFocus
