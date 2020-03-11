@@ -14,7 +14,8 @@ export default class Clap extends Component {
     this.state = {
       volume: 0,
       filterFrequency: 1000,
-      clapDelay: 0.025
+      clapDelay: 0.025,
+      clapDecay: 0.1
     }
 
     this.adjustVolume = this.adjustVolume.bind(this)
@@ -104,7 +105,11 @@ export default class Clap extends Component {
   }
 
   adjustClapDelay(event, value) {
-    this.setState({clapDelay: value}, () => {this.props.updateState({clap: this.state})})
+    this.setState({clapDelay: value})
+  }
+
+  returnState() {
+    this.props.updateState({clap: this.state})
   }
 
   render() {

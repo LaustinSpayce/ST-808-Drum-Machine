@@ -74,6 +74,10 @@ export default class Snare extends Component {
     }
   }
 
+  returnState() {
+    this.props.updateState({snare: this.state})
+  }
+
   render() {
     return (
       <ExpansionPanel>

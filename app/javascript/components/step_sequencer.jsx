@@ -9,10 +9,19 @@ import Kick from './synths/kick'
 import Snare from './synths/snare'
 import Cowbell from './synths/cowbell'
 import HiHats from './synths/hihats'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
+
+
 
 export default class StepSequencer extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {}
+
+    this.updateState = this.updateState.bind(this)
+    this.loadBeat = this.loadBeat.bind(this)
 
     this.closedHatArray = new Array(16).fill(null).map(()=>({ triggered: false }))
     this.openHatArray = new Array(16).fill(null).map(()=>({ triggered: false }))
@@ -105,6 +114,35 @@ export default class StepSequencer extends Component {
     this.refs.hihats.triggerClosedHats(time, value)
   }
 
+  updateState(object) {
+    for (var key of Object.keys(object)) {
+      this.setState({ [key]: object[key] })
+    }
+  }
+  
+  loadBeat() {
+    console.log(this.state)
+  }
+
+  saveBeat() {
+    this.refs.kick.returnState()
+    this.refs.clap.returnState()
+    this.refs.cowbell.returnState()
+    this.refs.hihats.returnState()
+    this.refs.snare.returnState()
+    this.setState({ BPM: Tone.Transport.bpm.value })
+    this.setState({ swing: Tone.Transport.swing })
+    this.setState({ timeSignature: Tone.Transport.timeSignature })
+    this.setState({ closedHatArray: this.closedHatArray })
+    this.setState({ openHatArray: this.openHatArray })
+    this.setState({ snareArray: this.snareArray })
+    this.setState({ kickArray: this.kickArray })
+    this.setState({ clapArray: this.clapArray })
+    this.setState({ cowbellArray: this.cowbellArray })
+    this.setState({ openHatArray: this.openHatArray })
+    console.log('Project status saved')
+  }
+
   render() {
     let array = []
     let bars = 0
@@ -149,15 +187,17 @@ export default class StepSequencer extends Component {
 
     return (
       <Container fixed>
-        <Button>SAVE</Button>
-        <Button>LOAD</Button>
+        <Box margin="1rem 0">
+          <Button margin="0 2rem 0 0" onClick={()=>{this.saveBeat()}}><CloudUploadIcon style={{ color: '#30303B' }}/></Button>
+          <Button onClick={this.loadBeat}><CloudDownloadIcon style={{ color: '#30303B' }}/></Button>
+        </Box>
 
-        <Box boxShadow={3} align="center" margin={"0 auto 1rem auto"}>        
-          <Kick ref="kick">Boom</Kick>
-          <Clap ref="clap"/>
-          <Snare ref="snare"/>
-          <Cowbell ref="cowbell"/>
-          <HiHats ref="hihats"/>
+        <Box boxShadow={3} align="center" margin={"0 auto 1rem auto"}> 
+          <Cowbell ref="cowbell" updateState={this.updateState}/>
+          <Clap ref="clap" updateState={this.updateState}/>
+          <HiHats ref="hihats" updateState={this.updateState}/>
+          <Snare ref="snare" updateState={this.updateState}/>
+          <Kick ref="kick" updateState={this.updateState} />
         </Box>
 
         <Box boxShadow={3} align="center" padding="1rem">
@@ -200,7 +240,7 @@ export default class StepSequencer extends Component {
               { margin: '0 8px', width: '96px'}
             }
             onClick={()=>{this.triggerOpenHat(0,'C4')}}
-            >Tssh
+            >OP
           </Button>{openHatPads}
           </Box>
           <Box
@@ -214,7 +254,7 @@ export default class StepSequencer extends Component {
               { margin: '0 8px', width: '96px'}
             }
             onClick={()=>{this.triggerClosedHat(0,'C4')}}
-            >Ts
+            >CL
           </Button>{closedHatPads}
           </Box>
           <Box

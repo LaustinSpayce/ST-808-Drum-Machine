@@ -89,6 +89,10 @@ export default class Cowbell extends Component {
     }
   }
 
+  returnState() {
+    this.props.updateState({cowbell: this.state})
+  }
+
   render() {
     return (
       <ExpansionPanel>

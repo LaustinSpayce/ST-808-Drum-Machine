@@ -51,6 +51,10 @@ export default class HiHats extends Component {
     
   }
 
+  returnState() {
+    this.props.updateState({hihats: this.state})
+  }
+
   render() {
     return (
       <ExpansionPanel>

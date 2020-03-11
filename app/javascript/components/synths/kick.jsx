@@ -97,6 +97,10 @@ export default class Kick extends Component {
     this.setState( {decay: newDecayLength} )
   }
 
+  returnState() {
+    this.props.updateState({kick: this.state})
+  }
+
   render() {
     return (  
       <ExpansionPanel>
