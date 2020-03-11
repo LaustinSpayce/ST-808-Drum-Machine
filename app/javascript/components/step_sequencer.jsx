@@ -11,8 +11,9 @@ import Cowbell from './synths/cowbell'
 import HiHats from './synths/hihats'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
+import axios from 'axios'
 
-
+// THIS FILE IS HORRIBLE
 
 export default class StepSequencer extends Component {
   constructor(props) {
@@ -124,23 +125,37 @@ export default class StepSequencer extends Component {
     console.log(this.state)
   }
 
-  saveBeat() {
-    this.refs.kick.returnState()
-    this.refs.clap.returnState()
-    this.refs.cowbell.returnState()
-    this.refs.hihats.returnState()
-    this.refs.snare.returnState()
-    this.setState({ BPM: Tone.Transport.bpm.value })
-    this.setState({ swing: Tone.Transport.swing })
-    this.setState({ timeSignature: Tone.Transport.timeSignature })
-    this.setState({ closedHatArray: this.closedHatArray })
-    this.setState({ openHatArray: this.openHatArray })
-    this.setState({ snareArray: this.snareArray })
-    this.setState({ kickArray: this.kickArray })
-    this.setState({ clapArray: this.clapArray })
-    this.setState({ cowbellArray: this.cowbellArray })
-    this.setState({ openHatArray: this.openHatArray })
-    console.log('Project status saved')
+  async saveBeat() {
+    this.saveBeatPromise()
+  }
+
+  async saveBeatPromise() {
+    await Promise.all([
+      this.refs.kick.returnState(),
+      this.refs.clap.returnState(),
+      this.refs.cowbell.returnState(),
+      this.refs.hihats.returnState(),
+      this.refs.snare.returnState(),
+      this.setState({ BPM: Tone.Transport.bpm.value }),
+      this.setState({ swing: Tone.Transport.swing }),
+      this.setState({ timeSignature: Tone.Transport.timeSignature }),
+      this.setState({ closedHatArray: this.closedHatArray }),
+      this.setState({ openHatArray: this.openHatArray }),
+      this.setState({ snareArray: this.snareArray }),
+      this.setState({ kickArray: this.kickArray }),
+      this.setState({ clapArray: this.clapArray }),
+      this.setState({ cowbellArray: this.cowbellArray }),
+      this.setState({ openHatArray: this.openHatArray })
+    ]).then((response) => {
+      // Pack the state into a JSON
+      let stateObject = this.state
+      axios.post('/songs/', {song: stateObject })
+    }).then((response) => {
+      console.log(response)
+    }
+    ).catch((error) => {
+      console.log(error)
+    })
   }
 
   render() {

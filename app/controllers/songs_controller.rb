@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
   # GET /songs
@@ -24,7 +25,7 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(song_params)
+    @song = Song.new({:song => params[:song]})
 
     respond_to do |format|
       if @song.save
@@ -69,6 +70,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:song)
+      # params.require(:song).permit(:song)
     end
 end
